@@ -83,4 +83,4 @@ Now, we see that the password was not so hard to guess, it is “password”, an
 
 ![image](https://user-images.githubusercontent.com/93059165/207591159-48e4b9b4-9763-4288-b417-0e64a6ff6856.png)
 
-The password worked, and we got the flag.
+**The password worked, and we got the flag.**
