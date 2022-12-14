@@ -7,7 +7,7 @@ From the first look we see nothing else, just the picture.
 
 Also metadata didn’t give much info about the flag.
 ``` sh
-$ exiftool  secret_kitteh_.jpg
+exiftool  secret_kitteh_.jpg
 ```
 
 ![image](https://user-images.githubusercontent.com/93059165/207590731-f00db596-e536-4b20-a1bd-acf6e2326b85.png)
@@ -16,7 +16,7 @@ So we dig deeper by looking at image at hex level.
   
 For this we used a GUI hex editor, GHEX. 
 ``` sh
-$ ghex secret_kitteh_.jpg
+ghex secret_kitteh_.jpg
 ``` 
 
 ![image](https://user-images.githubusercontent.com/93059165/207590849-7f034ea3-9c45-4743-a1f7-4b5b8026c3bf.png)
@@ -35,7 +35,7 @@ So, we copy the hex values from “37 7A BC” until the end, and we paste to an
 
 Then the “xxd” tool is used to convert this file into a binary file.
 ``` sh
-$ xxd -r -p f.hex output
+xxd -r -p f.hex output
 ``` 
 
 We now see the file, output, which is a 7z archive.
@@ -51,7 +51,7 @@ So, in order to crack the password of the zip file, first we must extract the ha
 This is done with the tool “7z2john”:
 
 ``` sh
-$ 7z2john output.7z > hashed.7z > hashed.hash
+7z2john output.7z > hashed.7z > hashed.hash
 ```
 
 This creates a file called hashed.hash which contains the hash of the 7z file.
@@ -65,7 +65,7 @@ A way to do this is by bruteforcing. So we need a list of passwords that could b
 I copied a list of common passwords “wordlist_passwords.txt” in the working directory, and used “John The Ripper” to bruteforce it.
 
 ``` sh
-$ John –wordlisst=wordlist_password.txt –format=7z hashed.hash
+john –wordlisst=wordlist_password.txt –format=7z hashed.hash
 ``` 
 
 ![image](https://user-images.githubusercontent.com/93059165/207591054-b1e42b27-d91f-4ef9-9460-e1a90f057808.png)
@@ -73,7 +73,7 @@ $ John –wordlisst=wordlist_password.txt –format=7z hashed.hash
 We don’t see a password here, so we will use another option of john “--show”.
 
 ``` sh
-$ john --show hashed.hash
+john --show hashed.hash
 
 ``` 
 
