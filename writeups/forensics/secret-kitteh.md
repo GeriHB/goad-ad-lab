@@ -7,7 +7,7 @@ From the first look we see nothing else, just the picture.
 
 Also metadata didn’t give much info about the flag.
 ``` sh
-exiftool  secret_kitteh_.jpg
+$ exiftool  secret_kitteh_.jpg
 ```
 
 ![image](https://user-images.githubusercontent.com/93059165/207590731-f00db596-e536-4b20-a1bd-acf6e2326b85.png)
