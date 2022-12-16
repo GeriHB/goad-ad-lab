@@ -1,4 +1,6 @@
 # Challenge Description
+
+## Team: Halil Berisha, Nemanja Cukic, Christian Klein, Yatharth Upmanue, Cedric Dixon, Mirko Mannigel
 Kitteh forensic challenge from TUCTF is just an image of a cat, and the flag is hidden somewhere.
 
 ![image](https://user-images.githubusercontent.com/93059165/207590365-e1bfcbd7-91d8-49a1-ba65-90a212bc1552.png)
