@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "writeups/pentesting/HTTP Request Smuggling/TE.CL Vulnerability.md",
+                "file": "writeups/pentesting/HTTP Request Smuggling/TE.TE Vulnerability.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "TE.CL Vulnerability"
+              "title": "TE.TE Vulnerability"
             }
           },
           {
@@ -107,7 +107,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "writeups/pentesting/HTTP Request Smuggling/TE.CL Vulnerability.md",
+                "file": "writeups/pentesting/HTTP Request Smuggling/TE.TE Vulnerability.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -117,7 +117,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for TE.CL Vulnerability"
+              "title": "Backlinks for TE.TE Vulnerability"
             }
           },
           {
@@ -126,12 +126,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "writeups/pentesting/HTTP Request Smuggling/TE.CL Vulnerability.md",
+                "file": "writeups/pentesting/HTTP Request Smuggling/TE.TE Vulnerability.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from TE.CL Vulnerability"
+              "title": "Outgoing links from TE.TE Vulnerability"
             }
           },
           {
@@ -153,10 +153,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "writeups/pentesting/HTTP Request Smuggling/TE.CL Vulnerability.md"
+                "file": "writeups/pentesting/HTTP Request Smuggling/TE.TE Vulnerability.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of TE.CL Vulnerability"
+              "title": "Outline of TE.TE Vulnerability"
             }
           }
         ]
@@ -179,6 +179,7 @@
   "active": "d654d92c9e523c30",
   "lastOpenFiles": [
     "writeups/pentesting/HTTP Request Smuggling/CL.TE Vulnerability.md",
+    "writeups/pentesting/HTTP Request Smuggling/TE.TE Vulnerability.md",
     "writeups/pentesting/HTTP Request Smuggling/TE.CL Vulnerability.md",
     "Screen Shot 2024-12-03 at 15.18.19.png",
     "writeups/pentesting/HTTP Request Smuggling/Images",
