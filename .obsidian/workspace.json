@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.MD",
+                "file": "writeups/pentesting/HTTP Request Smuggling/CL.TE Vulnerabilities.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "README"
+              "title": "CL.TE Vulnerabilities"
             }
           }
         ]
@@ -93,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.MD",
+                "file": "writeups/pentesting/HTTP Request Smuggling/CL.TE Vulnerabilities.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +103,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for README"
+              "title": "Backlinks for CL.TE Vulnerabilities"
             }
           },
           {
@@ -112,12 +112,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "README.MD",
+                "file": "writeups/pentesting/HTTP Request Smuggling/CL.TE Vulnerabilities.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from README"
+              "title": "Outgoing links from CL.TE Vulnerabilities"
             }
           },
           {
@@ -139,10 +139,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.MD"
+                "file": "writeups/pentesting/HTTP Request Smuggling/CL.TE Vulnerabilities.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of README"
+              "title": "Outline of CL.TE Vulnerabilities"
             }
           }
         ]
@@ -162,8 +162,19 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "e75ad8a210be6ccf",
+  "active": "d654d92c9e523c30",
   "lastOpenFiles": [
+    "Screen Shot 2024-12-03 at 15.18.19.png",
+    "writeups/pentesting/HTTP Request Smuggling/CL.TE Vulnerabilities.md",
+    "writeups/pentesting/HTTP Request Smuggling/Images",
+    "writeups/pentesting/PHP Unzipper Nuclei Template/PHPUnzipper Nuclei Template.md",
+    "CompletedCLTE 1.png",
+    "writeups/pentesting/HTTP Request Smuggling/Images/CompletedCLTE.png",
+    "Pasted image 20241203151945.png",
+    "Pasted image 20241203151802.png",
+    "Pasted image 20241203151756.png",
+    "README.MD",
+    "writeups/pentesting/HTTP Request Smuggling",
     "writeups/pentesting/PHP Unzipper Nuclei Template/php-unzipper.yaml",
     "writeups/pentesting/PHP Unzipper Nuclei Template"
   ]
