@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "writeups/pentesting/HTTP Request Smuggling/README.md",
+                "file": "writeups/pentesting/HTTP Request Smuggling/Finding HTTP request smuggling vulnerabilities/Confirming TE.CL vulnerability.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "README"
+              "title": "Confirming TE.CL vulnerability"
             }
           },
           {
@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "writeups/pentesting/HTTP Request Smuggling/CL.TE Vulnerability.md",
+                "file": "writeups/pentesting/HTTP Request Smuggling/Finding HTTP request smuggling vulnerabilities/Confirming CL.TE vulnerability.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "CL.TE Vulnerability"
+              "title": "Confirming CL.TE vulnerability"
             }
           }
         ]
@@ -176,16 +176,20 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "e75ad8a210be6ccf",
+  "active": "d654d92c9e523c30",
   "lastOpenFiles": [
-    "README.MD",
-    "writeups/pentesting/HTTP Request Smuggling/README.md",
-    "writeups/pentesting/HTTP Request Smuggling/TE.TE Vulnerability.md",
+    "writeups/pentesting/HTTP Request Smuggling/Finding HTTP request smuggling vulnerabilities/Confirming CL.TE vulnerability.md",
+    "writeups/pentesting/HTTP Request Smuggling/Finding HTTP request smuggling vulnerabilities/Confirming TE.CL vulnerability.md",
     "writeups/pentesting/HTTP Request Smuggling/CL.TE Vulnerability.md",
+    "writeups/pentesting/HTTP Request Smuggling/Finding HTTP request smuggling vulnerabilities/README.md",
+    "writeups/pentesting/PHP Unzipper Nuclei Template/PHPUnzipper Nuclei Template.md",
+    "writeups/pentesting/HTTP Request Smuggling/Finding HTTP request smuggling vulnerabilities",
+    "writeups/pentesting/HTTP Request Smuggling/README.md",
+    "README.MD",
+    "writeups/pentesting/HTTP Request Smuggling/TE.TE Vulnerability.md",
     "writeups/pentesting/HTTP Request Smuggling/TE.CL Vulnerability.md",
     "Screen Shot 2024-12-03 at 15.18.19.png",
     "writeups/pentesting/HTTP Request Smuggling/Images",
-    "writeups/pentesting/PHP Unzipper Nuclei Template/PHPUnzipper Nuclei Template.md",
     "CompletedCLTE 1.png",
     "writeups/pentesting/HTTP Request Smuggling/Images/CompletedCLTE.png",
     "Pasted image 20241203151945.png",
