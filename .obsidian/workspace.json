@@ -162,24 +162,25 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "e75ad8a210be6ccf",
+  "active": "320368d5e173632e",
   "lastOpenFiles": [
+    "Pasted image 20250128143740.png",
+    "Pasted image 20250128143626.png",
+    "Pasted image 20250128142739.png",
+    "Pasted image 20250128142617.png",
+    "Pasted image 20250128142417.png",
+    "Pasted image 20250128142221.png",
+    "Pasted image 20250128141858.png",
+    "Pasted image 20250128141704.png",
+    "Pasted image 20250128141237.png",
+    "Pasted image 20250128141103.png",
+    "Pasted image 20250128141051.png",
     "testFile",
-    "Pasted image 20250127162502.png",
-    "Pasted image 20250127161910.png",
     "writeups/pentesting/Insecure Deserialization/2. Identifying.md",
     "writeups/pentesting/Insecure Deserialization/3. Exploiting.md",
     "writeups/pentesting/Insecure Deserialization/1. Deserialization.md",
     "writeups/pentesting/Server-Side Template Injection/1. Server-Side Template Injection.md",
     "writeups/pentesting/Insecure Deserialization",
-    "Pasted image 20250127093422.png",
-    "Pasted image 20250127093003.png",
-    "Pasted image 20250127091324.png",
-    "Pasted image 20250127090937.png",
-    "Pasted image 20250127090832.png",
-    "Pasted image 20250127090511.png",
-    "Pasted image 20250127013737.png",
-    "Pasted image 20250127013550.png",
     "writeups/pentesting/JWT Attacks/5. Algorithm Confusion Attacks.md",
     "writeups/pentesting/Server-Side Template Injection",
     "writeups/pentesting/JWT Attacks/4.  JWT Header Parameter Injections.md",
@@ -208,7 +209,6 @@
     "writeups/pentesting/HTTP Request Smuggling/Advanced Request Smuggling/HTTP request tunelling.md",
     "writeups/pentesting/HTTP Request Smuggling/Browser-powered request smuggling",
     "writeups/pentesting/HTTP Request Smuggling/Advanced Request Smuggling/Untitled",
-    "writeups/pentesting/HTTP Request Smuggling/Advanced Request Smuggling",
-    "writeups/pentesting/HTTP Request Smuggling/Exploiting/Bypassing frontend security controls"
+    "writeups/pentesting/HTTP Request Smuggling/Advanced Request Smuggling"
   ]
 }
