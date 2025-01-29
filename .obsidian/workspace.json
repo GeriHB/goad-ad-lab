@@ -164,6 +164,17 @@
   },
   "active": "e75ad8a210be6ccf",
   "lastOpenFiles": [
+    "fix_md2.py",
+    "images/Pasted_image_20250128143740.png",
+    "images/Pasted_image_20250128143626.png",
+    "images/Pasted_image_20250128142739.png",
+    "images/Pasted_image_20250128142617.png",
+    "images/Pasted_image_20250128142417.png",
+    "images/Pasted_image_20250128142221.png",
+    "images/Pasted_image_20250128141858.png",
+    "images/Pasted_image_20250128141704.png",
+    "images/Pasted_image_20250128141237.png",
+    "images/Pasted_image_20250128141103.png",
     "fix_md.py",
     "writeups/pentesting/Ludus/GOAD/Delegation.md",
     "Untitled.md",
@@ -172,16 +183,6 @@
     "writeups/pentesting/Untitled 1.canvas",
     "writeups/pentesting/Untitled 1.md",
     "writeups/pentesting/Insecure Deserialization/3. Exploiting.md",
-    "images/Pasted image 20250116145621.png",
-    "images/Pasted image 20250120095031.png",
-    "images/Pasted image 20250107141138.png",
-    "images/Pasted image 20250128141051.png",
-    "images/Pasted image 20250128141858.png",
-    "images/Pasted image 20250126190945.png",
-    "images/Pasted image 20250107000204.png",
-    "images/Pasted image 20250123145829.png",
-    "images/Pasted image 20250124101000.png",
-    "images/Pasted image 20250122143340.png",
     "images",
     "testFile",
     "writeups/pentesting/Insecure Deserialization/2. Identifying.md",
@@ -210,7 +211,6 @@
     "writeups/pentesting/HTTP Request Smuggling/Browser-powered request smuggling/Pause-based desync attacks.md",
     "writeups/pentesting/Access Control/What is Access Control?",
     "writeups/pentesting/Access Control",
-    "writeups/pentesting/HTTP Request Smuggling/Browser-powered request smuggling",
-    "writeups/pentesting/HTTP Request Smuggling/Advanced Request Smuggling/Untitled"
+    "writeups/pentesting/HTTP Request Smuggling/Browser-powered request smuggling"
   ]
 }
