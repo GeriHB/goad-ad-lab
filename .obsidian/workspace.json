@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.MD",
+                "file": "writeups/Pentesting/Active Directory attacking/Ludus/GOAD/GOAD.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "README"
+              "title": "GOAD"
             }
           }
         ]
@@ -162,12 +162,12 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "e75ad8a210be6ccf",
+  "active": "320368d5e173632e",
   "lastOpenFiles": [
+    "README.MD",
     "writeups/Pentesting/Active Directory attacking",
     "writeups/Pentesting/Web Security",
     "writeups/Pentesting/Attacking and Defending AD/Active Directory.md",
-    "README.MD",
     "writeups/Pentesting/Web Security/PortSwigger",
     "updating_md_references.py",
     "fix_images_3.py",
@@ -197,7 +197,6 @@
     "writeups/Pentesting/Web Security/PortSwigger/Server-Side Template Injection/1. Server-Side Template Injection.md",
     "writeups/Pentesting/Web Security/PortSwigger/Insecure Deserialization",
     "writeups/Pentesting/Web Security/PortSwigger/JWT Attacks/5. Algorithm Confusion Attacks.md",
-    "writeups/Pentesting/Web Security/PortSwigger/Server-Side Template Injection",
     "writeups/Pentesting/Web Security/PortSwigger/JWT Attacks/4.  JWT Header Parameter Injections.md",
     "writeups/Pentesting/Web Security/PortSwigger/JWT Attacks/3. Brute-Forcing Secret Keys.md",
     "writeups/Pentesting/Web Security/PortSwigger/JWT Attacks/2. Exploiting Flawed JWT Signature Verification.md",
