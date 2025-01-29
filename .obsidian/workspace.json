@@ -164,6 +164,7 @@
   },
   "active": "e75ad8a210be6ccf",
   "lastOpenFiles": [
+    "fix_images_3.py",
     "fix_md2.py",
     "images/Pasted_image_20250128143740.png",
     "images/Pasted_image_20250128143626.png",
@@ -210,7 +211,6 @@
     "writeups/pentesting/Access Control/1. What is Access Control?.md",
     "writeups/pentesting/HTTP Request Smuggling/Browser-powered request smuggling/Pause-based desync attacks.md",
     "writeups/pentesting/Access Control/What is Access Control?",
-    "writeups/pentesting/Access Control",
-    "writeups/pentesting/HTTP Request Smuggling/Browser-powered request smuggling"
+    "writeups/pentesting/Access Control"
   ]
 }
