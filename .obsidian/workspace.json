@@ -11,14 +11,12 @@
             "id": "320368d5e173632e",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "image",
               "state": {
-                "file": "writeups/Pentesting/Active Directory attacking/Ludus/GOAD/GOAD.md",
-                "mode": "source",
-                "source": false
+                "file": "images/Pasted_image_20241219165113.png"
               },
-              "icon": "lucide-file",
-              "title": "GOAD"
+              "icon": "lucide-image",
+              "title": "Pasted_image_20241219165113"
             }
           }
         ]
@@ -164,9 +162,9 @@
   },
   "active": "320368d5e173632e",
   "lastOpenFiles": [
-    "writeups/Pentesting/Active Directory attacking/Ludus/GOAD/Delegation.md",
-    "writeups/Pentesting/Active Directory attacking/Ludus/GOAD/GOAD.md",
     "images.py",
+    "writeups/Pentesting/Active Directory attacking/Ludus/GOAD/GOAD.md",
+    "writeups/Pentesting/Active Directory attacking/Ludus/GOAD/Delegation.md",
     "writeups/Pentesting/Active Directory attacking/Ludus/GOAD/GOAD_2.md",
     "README.MD",
     "writeups/Pentesting/Active Directory attacking",
