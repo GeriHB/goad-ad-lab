@@ -1,29 +1,33 @@
 import os
 import re
 
-repo_path = "."  # Set this to your repository root
-images_folder = "images"  # Your image folder in the repo root
+# Folder where your images are stored
+image_folder = 'images'
 
-# Regex to match Obsidian-style image links
-obsidian_pattern = re.compile(r"!\[\[(Pasted image \d{14}\.png)\]\]")
+# Function to update image references in markdown files
+def update_md_references():
+    # Walk through all directories and files recursively
+    for root, dirs, files in os.walk('.'):
+        for md_file in files:
+            if md_file.endswith('.md'):
+                md_file_path = os.path.join(root, md_file)
 
-for root, _, files in os.walk(repo_path):
-    for file in files:
-        if file.endswith(".md"):
-            md_path = os.path.join(root, file)
+                # Open the markdown file and read its content
+                with open(md_file_path, 'r') as f:
+                    content = f.read()
 
-            # Calculate relative path to "images" from the .md file's directory
-            relative_path_to_root = os.path.relpath(repo_path, os.path.dirname(md_path))
-            relative_images_path = os.path.join(relative_path_to_root, images_folder).replace("\\", "/")
+                # Regular expression to match image links with relative paths
+                updated_content = re.sub(r'(\!\[\]\(\.\./\.\./\.\./\.\./\.\./)([^)]+)(\.png\))',
+                                        lambda m: f'![]({image_folder}/{m.group(2)})', content)
 
-            with open(md_path, "r", encoding="utf-8") as f:
-                content = f.read()
+                # Write the updated content back to the markdown file
+                if content != updated_content:
+                    with open(md_file_path, 'w') as f:
+                        f.write(updated_content)
 
-            # Replace Obsidian-style links with the correct relative path
-            new_content = obsidian_pattern.sub(r"![](" + relative_images_path + r"/\1)", content)
+                    print(f"Updated references in {md_file_path}")
 
-            if new_content != content:
-                with open(md_path, "w", encoding="utf-8") as f:
-                    f.write(new_content)
-                print(f"Updated: {md_path}")
+if __name__ == "__main__":
+    update_md_references()
+    print("Done!")
 
