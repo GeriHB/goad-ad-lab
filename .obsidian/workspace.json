@@ -164,6 +164,10 @@
   },
   "active": "320368d5e173632e",
   "lastOpenFiles": [
+    "writeups/Pentesting/Active Directory attacking/Ludus/GOAD/Delegation.md",
+    "writeups/Pentesting/Active Directory attacking/Ludus/GOAD/GOAD.md",
+    "images.py",
+    "writeups/Pentesting/Active Directory attacking/Ludus/GOAD/GOAD_2.md",
     "README.MD",
     "writeups/Pentesting/Active Directory attacking",
     "writeups/Pentesting/Web Security",
@@ -183,7 +187,6 @@
     "images/Pasted_image_20250128141237.png",
     "images/Pasted_image_20250128141103.png",
     "fix_md.py",
-    "writeups/Pentesting/Active Directory attacking/Ludus/GOAD/Delegation.md",
     "Untitled.md",
     "writeups/pentesting/Untitled.canvas",
     "writeups/pentesting/Untitled.md",
@@ -195,7 +198,6 @@
     "writeups/Pentesting/Web Security/PortSwigger/Insecure Deserialization/2. Identifying.md",
     "writeups/Pentesting/Web Security/PortSwigger/Insecure Deserialization/1. Deserialization.md",
     "writeups/Pentesting/Web Security/PortSwigger/Server-Side Template Injection/1. Server-Side Template Injection.md",
-    "writeups/Pentesting/Web Security/PortSwigger/Insecure Deserialization",
     "writeups/Pentesting/Web Security/PortSwigger/JWT Attacks/5. Algorithm Confusion Attacks.md",
     "writeups/Pentesting/Web Security/PortSwigger/JWT Attacks/4.  JWT Header Parameter Injections.md",
     "writeups/Pentesting/Web Security/PortSwigger/JWT Attacks/3. Brute-Forcing Secret Keys.md",
@@ -208,8 +210,6 @@
     "writeups/Pentesting/Web Security/PortSwigger/Access Control/7. Referer-Based Access Control.md",
     "writeups/Pentesting/Web Security/PortSwigger/Access Control/6. Access Control Vulnerabilities in Mult-Step Processes.md",
     "writeups/Pentesting/Web Security/PortSwigger/Access Control/5. IDOR - Insecure Direct Object References.md",
-    "writeups/Pentesting/Web Security/PortSwigger/Access Control/4. Horizontal to Vertical Privilege Escalation.md",
-    "writeups/Pentesting/Web Security/PortSwigger/Access Control/3. Horizontal Privilege Escalation.md",
-    "writeups/Pentesting/Web Security/PortSwigger/Access Control/2. Vertical Privilege Escalation.md"
+    "writeups/Pentesting/Web Security/PortSwigger/Access Control/4. Horizontal to Vertical Privilege Escalation.md"
   ]
 }
