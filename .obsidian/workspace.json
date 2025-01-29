@@ -162,8 +162,9 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "320368d5e173632e",
+  "active": "e75ad8a210be6ccf",
   "lastOpenFiles": [
+    "fix_md.py",
     "writeups/pentesting/Ludus/GOAD/Delegation.md",
     "Untitled.md",
     "writeups/pentesting/Untitled.canvas",
@@ -209,7 +210,6 @@
     "writeups/pentesting/HTTP Request Smuggling/Browser-powered request smuggling/Pause-based desync attacks.md",
     "writeups/pentesting/Access Control/What is Access Control?",
     "writeups/pentesting/Access Control",
-    "writeups/pentesting/HTTP Request Smuggling/Browser-powered request smuggling/Client-side desync attacks.md",
     "writeups/pentesting/HTTP Request Smuggling/Browser-powered request smuggling",
     "writeups/pentesting/HTTP Request Smuggling/Advanced Request Smuggling/Untitled"
   ]
