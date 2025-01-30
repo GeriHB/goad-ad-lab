@@ -8,17 +8,27 @@
 │   │   ├── Active Directory attacking
 │   │   │   ├── Arya.Stark.md
 │   │   │   ├── Ludus
+│   │   │   │   ├── GOAD
+│   │   │   │   └── Instructions.md
 │   │   │   └── README.md
 │   │   ├── HackTheBox
 │   │   │   ├── Paths
+│   │   │   │   └── operating_systems
 │   │   │   └── README.md
 │   │   ├── README.md
 │   │   └── Web Security
 │   │       ├── PortSwigger
+│   │       │   ├── Access Control
+│   │       │   ├── Authentication
+│   │       │   ├── HTTP Request Smuggling
+│   │       │   ├── Insecure Deserialization
+│   │       │   ├── JWT Attacks
+│   │       │   ├── README.md
+│   │       │   └── Server-Side Template Injection
 │   │       └── README.md
 │   └── forensics
 │       └── secret-kitteh.md
 └── treeGenerator.sh
 
-10 directories, 9 files
+18 directories, 11 files
 ```
