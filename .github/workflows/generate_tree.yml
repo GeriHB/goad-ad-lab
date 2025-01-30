@@ -9,20 +9,20 @@ jobs:
   update-tree:
     runs-on: ubuntu-latest
 
-steps:
-  - name: Checkout code
-    uses: actions/checkout@v2
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-  - name: Install tree
-    run: sudo apt-get install tree
+      - name: Install tree
+        run: sudo apt-get install tree
 
-  - name: Run tree script
-    run: ./treeGenerator.sh
+      - name: Run tree script
+        run: ./treeGenerator.sh
 
-  - name: Commit and push changes
-    run: |
-      git config --global user.name "GeriHB"
-      git config --global user.email "halilberishaa@gmail.com"
-      git add Directory_Tree.md
-      git commit -m "Update tree"
-      git push
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "GeriHB"
+          git config --global user.email "halilberishaa@gmail.com"
+          git add Directory_Tree.md
+          git commit -m "Update tree"
+          git push
