@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Writeups/Pentesting/README.md",
+                "file": "Writeups/Pentesting/Web Security/README.md",
                 "mode": "source",
                 "source": false
               },
@@ -33,7 +33,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Writeups/Pentesting/Active Directory attacking/README.md",
+                "file": "Writeups/Pentesting/Web Security/PortSwigger/README.md",
                 "mode": "source",
                 "source": false
               },
@@ -182,10 +182,12 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "e75ad8a210be6ccf",
+  "active": "b770e6f52286949f",
   "lastOpenFiles": [
-    "Writeups/Pentesting/Active Directory attacking/README.md",
+    "Writeups/Pentesting/Web Security/PortSwigger/README.md",
+    "Writeups/Pentesting/Web Security/README.md",
     "Writeups/Pentesting/README.md",
+    "Writeups/Pentesting/Active Directory attacking/README.md",
     "README.MD",
     "Writeups/Pentesting/HackTheBox/Paths/operating_systems/knowledge_base/Linux.md",
     "Writeups/Pentesting/HackTheBox/Paths/operating_systems/knowledge_base",
@@ -229,8 +231,6 @@
     "Writeups/Pentesting/Web Security/PortSwigger/JWT Attacks/2. Exploiting Flawed JWT Signature Verification.md",
     "Writeups/Pentesting/Web Security/PortSwigger/JWT Attacks/1. JWT and JWT Attacks.md",
     "Writeups/Pentesting/Web Security/PortSwigger/Authentication/3. Vulnerabilities in Other Authentication Mechanisms.md",
-    "Writeups/Pentesting/Web Security/PortSwigger/Authentication/3. Vulnerabilities in Multi-Factor Authentication.md",
-    "Writeups/Pentesting/Web Security/PortSwigger/Authentication/2. Vulnerabilities in Password-Based login.md",
-    "Writeups/Pentesting/Web Security/PortSwigger/Authentication/1. Authentication Vulnerabilities.md"
+    "Writeups/Pentesting/Web Security/PortSwigger/Authentication/3. Vulnerabilities in Multi-Factor Authentication.md"
   ]
 }
