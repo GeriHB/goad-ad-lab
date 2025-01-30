@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "b7d7ec4b333f28a3",
+        "id": "739ddbbc4c9b713a",
         "type": "tabs",
         "children": [
           {
-            "id": "b770e6f52286949f",
+            "id": "943c55419e0ad1a1",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Writeups/Pentesting/Web Security/README.md",
+                "file": "README.MD",
                 "mode": "source",
                 "source": false
               },
@@ -24,16 +24,16 @@
         ]
       },
       {
-        "id": "5f0c0ad2d7026474",
+        "id": "d1ff134555c4fc2d",
         "type": "tabs",
         "children": [
           {
-            "id": "320368d5e173632e",
+            "id": "a817f78e946ce5d4",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Writeups/Pentesting/Web Security/PortSwigger/README.md",
+                "file": "Writeups/Pentesting/Active Directory attacking/README.md",
                 "mode": "source",
                 "source": false
               },
@@ -182,31 +182,45 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "b770e6f52286949f",
+  "active": "943c55419e0ad1a1",
   "lastOpenFiles": [
-    "Writeups/Pentesting/Web Security/PortSwigger/README.md",
-    "Writeups/Pentesting/Web Security/README.md",
-    "Writeups/Pentesting/README.md",
+    "treeGenerator.sh",
     "Writeups/Pentesting/Active Directory attacking/README.md",
     "README.MD",
-    "Writeups/Pentesting/HackTheBox/Paths/operating_systems/knowledge_base/Linux.md",
+    "Writeups/treeGenerator.sh",
+    "Writeups/Pentesting/HackTheBox/README.md",
+    "Writeups/Pentesting/Web Security/PortSwigger/README.md",
+    "Writeups/Pentesting/Web Security/README.md",
+    "Writeups/Pentesting/Web Security/PortSwigger/Server-Side Template Injection/1. Detect.md",
+    "Writeups/Pentesting/Web Security/PortSwigger/Server-Side Template Injection/README.md",
+    "Writeups/Pentesting/Web Security/PortSwigger/Server-Side Template Injection/5. Create a custom attack.md",
+    "Writeups/Pentesting/Web Security/PortSwigger/Server-Side Template Injection/4. Explore.md",
+    "Writeups/Pentesting/Web Security/PortSwigger/Server-Side Template Injection/3. Exploit.md",
+    "Writeups/Pentesting/Web Security/PortSwigger/Server-Side Template Injection/2. Identify.md",
+    "Writeups/Pentesting/Web Security/PortSwigger/JWT Attacks/README.md",
+    "Writeups/Pentesting/Web Security/PortSwigger/Access Control/README.md",
+    "Writeups/Pentesting/Web Security/PortSwigger/JWT Attacks/4. Algorithm Confusion Attacks.md",
+    "Writeups/Pentesting/Web Security/PortSwigger/JWT Attacks/3.  JWT Header Parameter Injections.md",
+    "Writeups/Pentesting/Web Security/PortSwigger/JWT Attacks/2. Brute-Forcing Secret Keys.md",
+    "Writeups/Pentesting/Web Security/PortSwigger/JWT Attacks/1. Exploiting Flawed JWT Signature Verification.md",
+    "Writeups/Pentesting/Web Security/PortSwigger/Insecure Deserialization/2. Exploiting.md",
+    "Writeups/Pentesting/Web Security/PortSwigger/Insecure Deserialization/Exploiting.md",
+    "Writeups/Pentesting/Web Security/PortSwigger/Insecure Deserialization/1. Identifying.md",
+    "Writeups/Pentesting/Web Security/PortSwigger/Insecure Deserialization/README.md",
+    "Writeups/Pentesting/Web Security/PortSwigger/HTTP Request Smuggling/Exploiting/README.md",
+    "Writeups/Pentesting/Web Security/PortSwigger/HTTP Request Smuggling/3. TE.TE Vulnerability.md",
+    "Writeups/Pentesting/Web Security/PortSwigger/HTTP Request Smuggling/2. TE.CL Vulnerability.md",
+    "Writeups/Pentesting/Web Security/PortSwigger/HTTP Request Smuggling/1. CL.TE Vulnerability.md",
     "Writeups/Pentesting/HackTheBox/Paths/operating_systems/knowledge_base",
     "Writeups/Pentesting/HackTheBox/Paths/operating_systems",
     "Writeups/Pentesting/HackTheBox/Paths",
     "Writeups/Pentesting/HackTheBox",
-    "link-to-your-writeup.md",
-    "link-to-ludeus-repo.md",
-    "Writeups/Pentesting/Active Directory attacking/Ludus/GOAD/GOAD.md",
     "images.py",
     "images/Pasted_image_20241219165113.png",
-    "Writeups/Pentesting/Active Directory attacking/Ludus/GOAD/Delegation.md",
-    "Writeups/Pentesting/Active Directory attacking/Ludus/GOAD/GOAD_2.md",
     "Writeups/Pentesting/Active Directory attacking",
     "Writeups/Pentesting/Web Security",
-    "writeups/Pentesting/Attacking and Defending AD/Active Directory.md",
     "Writeups/Pentesting/Web Security/PortSwigger",
     "updating_md_references.py",
-    "fix_images_3.py",
     "images/Pasted_image_20250128143740.png",
     "images/Pasted_image_20250128143626.png",
     "images/Pasted_image_20250128142739.png",
@@ -216,21 +230,7 @@
     "images/Pasted_image_20250128141858.png",
     "images/Pasted_image_20250128141704.png",
     "images/Pasted_image_20250128141237.png",
-    "Untitled.md",
     "writeups/pentesting/Untitled.canvas",
-    "writeups/pentesting/Untitled.md",
-    "writeups/pentesting/Untitled 1.canvas",
-    "writeups/pentesting/Untitled 1.md",
-    "Writeups/Pentesting/Web Security/PortSwigger/Insecure Deserialization/3. Exploiting.md",
-    "Writeups/Pentesting/Web Security/PortSwigger/Insecure Deserialization/2. Identifying.md",
-    "Writeups/Pentesting/Web Security/PortSwigger/Insecure Deserialization/1. Deserialization.md",
-    "Writeups/Pentesting/Web Security/PortSwigger/Server-Side Template Injection/1. Server-Side Template Injection.md",
-    "Writeups/Pentesting/Web Security/PortSwigger/JWT Attacks/5. Algorithm Confusion Attacks.md",
-    "Writeups/Pentesting/Web Security/PortSwigger/JWT Attacks/4.  JWT Header Parameter Injections.md",
-    "Writeups/Pentesting/Web Security/PortSwigger/JWT Attacks/3. Brute-Forcing Secret Keys.md",
-    "Writeups/Pentesting/Web Security/PortSwigger/JWT Attacks/2. Exploiting Flawed JWT Signature Verification.md",
-    "Writeups/Pentesting/Web Security/PortSwigger/JWT Attacks/1. JWT and JWT Attacks.md",
-    "Writeups/Pentesting/Web Security/PortSwigger/Authentication/3. Vulnerabilities in Other Authentication Mechanisms.md",
-    "Writeups/Pentesting/Web Security/PortSwigger/Authentication/3. Vulnerabilities in Multi-Factor Authentication.md"
+    "writeups/pentesting/Untitled 1.canvas"
   ]
 }
