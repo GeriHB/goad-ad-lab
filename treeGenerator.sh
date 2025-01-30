@@ -8,7 +8,7 @@ echo "# Directory Tree" > $FILE
 echo '```' >> $FILE
 
 #Generate the tree
-tree -L 3 >> $FILE
+tree -L 4 >> $FILE
 
 #Close the block
 echo '```' >> $FILE
