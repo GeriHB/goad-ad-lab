@@ -8,26 +8,32 @@
         "type": "tabs",
         "children": [
           {
-            "id": "320368d5e173632e",
+            "id": "b770e6f52286949f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "writeups/Pentesting/Active Directory attacking/README.md",
+                "file": "writeups/Pentesting/README.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
               "title": "README"
             }
-          },
+          }
+        ]
+      },
+      {
+        "id": "5f0c0ad2d7026474",
+        "type": "tabs",
+        "children": [
           {
-            "id": "24ec9cdfccc08804",
+            "id": "320368d5e173632e",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.MD",
+                "file": "writeups/Pentesting/Active Directory attacking/README.md",
                 "mode": "source",
                 "source": false
               },
@@ -176,12 +182,18 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "320368d5e173632e",
+  "active": "b770e6f52286949f",
   "lastOpenFiles": [
-    "link-to-your-writeup.md",
     "writeups/Pentesting/Active Directory attacking/README.md",
-    "link-to-ludeus-repo.md",
+    "writeups/Pentesting/README.md",
     "README.MD",
+    "writeups/Pentesting/HackTheBox/Paths/operating_systems/knowledge_base/Linux.md",
+    "writeups/Pentesting/HackTheBox/Paths/operating_systems/knowledge_base",
+    "writeups/Pentesting/HackTheBox/Paths/operating_systems",
+    "writeups/Pentesting/HackTheBox/Paths",
+    "writeups/Pentesting/HackTheBox",
+    "link-to-your-writeup.md",
+    "link-to-ludeus-repo.md",
     "writeups/Pentesting/Active Directory attacking/Ludus/GOAD/GOAD.md",
     "images.py",
     "images/Pasted_image_20241219165113.png",
@@ -193,7 +205,6 @@
     "writeups/Pentesting/Web Security/PortSwigger",
     "updating_md_references.py",
     "fix_images_3.py",
-    "fix_md2.py",
     "images/Pasted_image_20250128143740.png",
     "images/Pasted_image_20250128143626.png",
     "images/Pasted_image_20250128142739.png",
@@ -203,15 +214,12 @@
     "images/Pasted_image_20250128141858.png",
     "images/Pasted_image_20250128141704.png",
     "images/Pasted_image_20250128141237.png",
-    "fix_md.py",
     "Untitled.md",
     "writeups/pentesting/Untitled.canvas",
     "writeups/pentesting/Untitled.md",
     "writeups/pentesting/Untitled 1.canvas",
     "writeups/pentesting/Untitled 1.md",
     "writeups/Pentesting/Web Security/PortSwigger/Insecure Deserialization/3. Exploiting.md",
-    "images",
-    "testFile",
     "writeups/Pentesting/Web Security/PortSwigger/Insecure Deserialization/2. Identifying.md",
     "writeups/Pentesting/Web Security/PortSwigger/Insecure Deserialization/1. Deserialization.md",
     "writeups/Pentesting/Web Security/PortSwigger/Server-Side Template Injection/1. Server-Side Template Injection.md",
@@ -223,8 +231,6 @@
     "writeups/Pentesting/Web Security/PortSwigger/Authentication/3. Vulnerabilities in Other Authentication Mechanisms.md",
     "writeups/Pentesting/Web Security/PortSwigger/Authentication/3. Vulnerabilities in Multi-Factor Authentication.md",
     "writeups/Pentesting/Web Security/PortSwigger/Authentication/2. Vulnerabilities in Password-Based login.md",
-    "writeups/Pentesting/Web Security/PortSwigger/Authentication/1. Authentication Vulnerabilities.md",
-    "writeups/Pentesting/Web Security/PortSwigger/Access Control/7. Referer-Based Access Control.md",
-    "writeups/Pentesting/Web Security/PortSwigger/Access Control/6. Access Control Vulnerabilities in Mult-Step Processes.md"
+    "writeups/Pentesting/Web Security/PortSwigger/Authentication/1. Authentication Vulnerabilities.md"
   ]
 }
