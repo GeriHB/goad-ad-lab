@@ -29,7 +29,8 @@
 │   └── forensics
 │       └── secret-kitteh.md
 ├── howtohacklikealegend.pdf
+├── links_info
 └── treeGenerator.sh
 
-18 directories, 12 files
+18 directories, 13 files
 ```
