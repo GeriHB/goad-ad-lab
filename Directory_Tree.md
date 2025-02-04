@@ -24,6 +24,7 @@
 │   │       │   ├── HTTP Request Smuggling
 │   │       │   ├── Insecure Deserialization
 │   │       │   ├── JWT Attacks
+│   │       │   ├── Paths
 │   │       │   ├── README.md
 │   │       │   └── Server-Side Template Injection
 │   │       └── README.md
@@ -35,5 +36,5 @@
 │   └── wp_final.py
 └── treeGenerator.sh
 
-20 directories, 14 files
+21 directories, 14 files
 ```
