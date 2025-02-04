@@ -13,6 +13,7 @@
 │   │   │   └── README.md
 │   │   ├── HackTheBox
 │   │   │   ├── Paths
+│   │   │   │   ├── Bug_Bounty_Hunter
 │   │   │   │   └── operating_systems
 │   │   │   └── README.md
 │   │   ├── README.md
@@ -34,5 +35,5 @@
 │   └── wp_final.py
 └── treeGenerator.sh
 
-19 directories, 14 files
+20 directories, 14 files
 ```
