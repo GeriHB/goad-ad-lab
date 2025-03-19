@@ -4,6 +4,12 @@
 ├── Directory_Tree.md
 ├── README.MD
 ├── Writeups
+│   ├── HTB_Machines
+│   │   ├── README.md
+│   │   └── Tracks
+│   │       └── Intro_to_Read_Team
+│   │           ├── Cap.md
+│   │           └── Jerry.md
 │   ├── Pentesting
 │   │   ├── Active Directory attacking
 │   │   │   ├── Arya.Stark.md
@@ -12,7 +18,6 @@
 │   │   │   │   └── Instructions.md
 │   │   │   └── README.md
 │   │   ├── HackTheBox
-│   │   │   ├── Machines
 │   │   │   ├── Paths
 │   │   │   │   ├── Bug_Bounty_Hunter
 │   │   │   │   └── operating_systems
@@ -37,5 +42,5 @@
 │   └── wp_final.py
 └── treeGenerator.sh
 
-22 directories, 14 files
+24 directories, 17 files
 ```
