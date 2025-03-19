@@ -11,14 +11,10 @@
             "id": "ac90b40bec36ca6b",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Pentesting/HackTheBox/Machines/Tracks/Intro_to_Read_Team/Jerry.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "Jerry"
+              "title": "New tab"
             }
           }
         ]
@@ -161,7 +157,19 @@
   },
   "active": "ac90b40bec36ca6b",
   "lastOpenFiles": [
-    "Pentesting/HackTheBox/Machines/Tracks/Intro_to_Read_Team/Cap.md",
-    "Pentesting/HackTheBox/Machines/Tracks/Intro_to_Read_Team/Jerry.md"
+    "HTB_Machines/Tracks/Intro_to_Read_Team/Jerry.md",
+    "HTB_Machines/Tracks/Intro_to_Read_Team/Cap.md",
+    "HTB_Machines/Tracks/Intro_to_Read_Team",
+    "HTB_Machines/Tracks",
+    "HTB_Machines/README.md",
+    "HTB_Machines",
+    "Pentesting/HackTheBox/Machines/Tracks/Intro_to_Read_Team/Jerry.md",
+    "Machines/Tracks/Intro_to_Read_Team/Jerry.md",
+    "Machines/Tracks/Intro_to_Read_Team/Cap.md",
+    "Machines/Tracks/Intro_to_Read_Team",
+    "Machines/Tracks",
+    "Machines/README.md",
+    "Machines",
+    "Pentesting/HackTheBox/Machines/Tracks/Intro_to_Read_Team/Cap.md"
   ]
 }
