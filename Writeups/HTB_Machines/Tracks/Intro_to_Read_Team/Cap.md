@@ -1,5 +1,5 @@
 # Cap
-----------
+
 *Linux* - Running an HTTP server that performs administrative functions including network captures. Improper controls result in IDOR giving access to another user's capture. It contains plaintext credentials and can be used to gain foothold. A Linux capability then is leveraged to escalate to root.
 
 -----------------------
