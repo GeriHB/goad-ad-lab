@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "HTB_Machines/Tracks/Intro_to_Read_Team/Devvortex.md",
+                "file": "HTB_Machines/Tracks/Intro_to_Read_Team/Paper.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Devvortex"
+              "title": "Paper"
             }
           }
         ]
@@ -161,9 +161,14 @@
   },
   "active": "ac90b40bec36ca6b",
   "lastOpenFiles": [
+    "HTB_Machines/CyberApocalypse_2025/Osint - Echoes in Stone.md",
+    "HTB_Machines/Tracks/Intro_to_Read_Team/Paper.md",
+    "HTB_Machines/CyberApocalypse_2025/Trial by Fire.md",
+    "HTB_Machines/CyberApocalypse_2025/Whispers of the Moonbeam.md",
+    "HTB_Machines/Tracks/Intro_to_Read_Team/Devvortex.md",
+    "HTB_Machines/CyberApocalypse_2025",
     "HTB_Machines/Tracks/Intro_to_Read_Team/Sau.md",
     "HTB_Machines/Tracks/Intro_to_Read_Team/GoodGames.md",
-    "HTB_Machines/Tracks/Intro_to_Read_Team/Devvortex.md",
     "HTB_Machines/Tracks/Intro_to_Read_Team/Cap.md",
     "HTB_Machines/Tracks/Intro_to_Read_Team/Jerry/exploit.py",
     "HTB_Machines/Tracks/Intro_to_Read_Team/Jerry/Maltrail_0.53_exploit.py",
