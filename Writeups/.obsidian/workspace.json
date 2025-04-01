@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "HTB_Machines/Tracks/Intro_to_Read_Team/Precious.md",
+                "file": "HTB_Machines/Tracks/Intro_to_Read_Team/Driver/Driver.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Precious"
+              "title": "Driver"
             }
           }
         ]
@@ -161,8 +161,14 @@
   },
   "active": "a5fbd336b84cbcf0",
   "lastOpenFiles": [
-    "HTB_Machines/Tracks/Intro_to_Read_Team/Writeup/Writeup.md",
+    "HTB_Machines/Tracks/Intro_to_Read_Team/Driver/meterpreter.exe",
+    "HTB_Machines/Tracks/Intro_to_Read_Team/Driver/tony_hash",
+    "HTB_Machines/Tracks/Intro_to_Read_Team/Driver/scf_attack.scf",
+    "HTB_Machines/Tracks/Intro_to_Read_Team/Driver",
+    "HTB_Machines/Tracks/Intro_to_Read_Team/Cap.md",
+    "HTB_Machines/Tracks/Intro_to_Read_Team/Driver/Driver.md",
     "HTB_Machines/Tracks/Intro_to_Read_Team/Precious.md",
+    "HTB_Machines/Tracks/Intro_to_Read_Team/Writeup/Writeup.md",
     "HTB_Machines/Tracks/Intro_to_Read_Team/Writeup/hash",
     "HTB_Machines/Tracks/Intro_to_Read_Team/Writeup/Untitled.md",
     "HTB_Machines/Tracks/Intro_to_Read_Team/Writeup/CVE_2019_9053.py",
@@ -175,16 +181,12 @@
     "HTB_Machines/CyberApocalypse_2025",
     "HTB_Machines/Tracks/Intro_to_Read_Team/Sau.md",
     "HTB_Machines/Tracks/Intro_to_Read_Team/GoodGames.md",
-    "HTB_Machines/Tracks/Intro_to_Read_Team/Cap.md",
     "HTB_Machines/Tracks/Intro_to_Read_Team/Jerry/exploit.py",
     "HTB_Machines/Tracks/Intro_to_Read_Team/Jerry/Maltrail_0.53_exploit.py",
     "HTB_Machines/Tracks/Intro_to_Read_Team/Jerry/Jerry.md",
     "HTB_Machines/Tracks/Intro_to_Read_Team/Jerry",
     "HTB_Machines/Tracks/Intro_to_Read_Team/Jerry.md",
-    "HTB_Machines/Tracks/Intro_to_Read_Team",
-    "HTB_Machines/Tracks",
     "HTB_Machines/README.md",
-    "HTB_Machines",
     "Pentesting/HackTheBox/Machines/Tracks/Intro_to_Read_Team/Jerry.md",
     "Machines/Tracks/Intro_to_Read_Team/Jerry.md",
     "Machines/Tracks/Intro_to_Read_Team/Cap.md",
