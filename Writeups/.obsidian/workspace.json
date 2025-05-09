@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "HTB_Machines/Tracks/BroadLight/BroadLight.md",
+                "file": "Pentesting/Active Directory attacking/GOAD/7. Bonus - Sliver.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "BroadLight"
+              "title": "7. Bonus - Sliver"
             }
           }
         ]
@@ -159,40 +159,44 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "9d4e2e3d88f8a597",
+  "active": "a5fbd336b84cbcf0",
   "lastOpenFiles": [
+    "Pentesting/Active Directory attacking/GOAD/6. ADCS and Delegation.md",
+    "Pentesting/Active Directory attacking/GOAD/5. Golden Ticket.md",
+    "Pentesting/Active Directory attacking/GOAD/3. Credential Access.md",
+    "Pentesting/Active Directory attacking/GOAD/4. Privilege Escalation.md",
+    "Pentesting/Active Directory attacking/GOAD/2. Initial Access.md",
+    "Pentesting/Active Directory attacking/GOAD/1. Reconnaissance.md",
+    "Pentesting/Active Directory attacking/GOAD/Sliver.md",
+    "Pentesting/Active Directory attacking/README.md",
+    "Pentesting/Active Directory attacking/GOAD/README.md",
+    "Pentesting/Active Directory attacking/Ludus/GOAD/3. Credential Access.md",
+    "Pentesting/Active Directory attacking/GOAD/GOAD.zip",
+    "Pentesting/Active Directory attacking/GOAD/7. Bonus - Sliver.md",
+    "Pentesting/Active Directory attacking/GOAD",
+    "Pentesting/Active Directory attacking.zip",
+    "Pentesting/Active Directory attacking/Ludus/GOAD/4. Privilege Escalation.md",
+    "Pentesting/Active Directory attacking/Ludus/GOAD/2. Initial Access.md",
+    "Pentesting/Active Directory attacking/Ludus/GOAD/GOAD.zip",
+    "Pentesting/Active Directory attacking/Ludus/Instructions.md",
+    "Pentesting/Active Directory attacking/Ludus/GOAD/7. Bonus - Sliver.md",
+    "Pentesting/Active Directory attacking/Ludus/GOAD/Sliver.md",
+    "Pentesting/Active Directory attacking/Ludus/GOAD/6. ADCS and Delegation.md",
+    "Pentesting/Active Directory attacking/Ludus/GOAD/Delegation.md",
+    "Pentesting/Active Directory attacking/Ludus/GOAD/ADCS.md",
+    "Pentesting/Active Directory attacking/Ludus/GOAD/Pwning Domain Admin.md",
+    "Pentesting/Active Directory attacking/Ludus/GOAD/AMSI Bypass.md",
+    "Pentesting/Active Directory attacking/Ludus/GOAD/5. Golden Ticket.md",
+    "Pentesting/Active Directory attacking/Ludus/GOAD/GOAD.md",
+    "Pentesting/Active Directory attacking/Ludus/GOAD/GOAD_2.md",
+    "Pentesting/Active Directory attacking/Ludus/GOAD/GOAD (copy 1).md",
+    "Pentesting/Active Directory attacking/Ludus/GOAD/1. Reconnaissance.md",
+    "GOAD.png",
     "HTB_Machines/Tracks/BroadLight/php_oneliner.php",
-    "HTB_Machines/Tracks/BroadLight/Untitled.md",
-    "HTB_Machines/Tracks/BroadLight/BroadLight.md",
     "HTB_Machines/Tracks/BroadLight",
-    "HTB_Machines/Tracks/Intro_to_Read_Team/Cap.md",
-    "HTB_Machines/Tracks/Intro_to_Read_Team/Driver/Driver.md",
     "HTB_Machines/Tracks/Intro_to_Read_Team/Driver/meterpreter.exe",
     "HTB_Machines/Tracks/Intro_to_Read_Team/Driver/tony_hash",
     "HTB_Machines/Tracks/Intro_to_Read_Team/Driver/scf_attack.scf",
-    "HTB_Machines/Tracks/Intro_to_Read_Team/Driver",
-    "HTB_Machines/Tracks/Intro_to_Read_Team/Precious.md",
-    "HTB_Machines/Tracks/Intro_to_Read_Team/Writeup/Writeup.md",
-    "HTB_Machines/Tracks/Intro_to_Read_Team/Writeup/hash",
-    "HTB_Machines/Tracks/Intro_to_Read_Team/Writeup/Untitled.md",
-    "HTB_Machines/Tracks/Intro_to_Read_Team/Writeup/CVE_2019_9053.py",
-    "HTB_Machines/Tracks/Intro_to_Read_Team/Writeup",
-    "HTB_Machines/Tracks/Intro_to_Read_Team/Paper.md",
-    "HTB_Machines/CyberApocalypse_2025/Osint - Echoes in Stone.md",
-    "HTB_Machines/CyberApocalypse_2025/Trial by Fire.md",
-    "HTB_Machines/CyberApocalypse_2025/Whispers of the Moonbeam.md",
-    "HTB_Machines/Tracks/Intro_to_Read_Team/Devvortex.md",
-    "HTB_Machines/CyberApocalypse_2025",
-    "HTB_Machines/Tracks/Intro_to_Read_Team/Sau.md",
-    "HTB_Machines/Tracks/Intro_to_Read_Team/GoodGames.md",
-    "HTB_Machines/Tracks/Intro_to_Read_Team/Jerry/exploit.py",
-    "HTB_Machines/Tracks/Intro_to_Read_Team/Jerry/Jerry.md",
-    "HTB_Machines/Tracks/Intro_to_Read_Team/Jerry.md",
-    "HTB_Machines/README.md",
-    "Pentesting/HackTheBox/Machines/Tracks/Intro_to_Read_Team/Jerry.md",
-    "Machines/Tracks/Intro_to_Read_Team/Jerry.md",
-    "Machines/Tracks/Intro_to_Read_Team/Cap.md",
-    "Machines/README.md",
-    "Pentesting/HackTheBox/Machines/Tracks/Intro_to_Read_Team/Cap.md"
+    "HTB_Machines/Tracks/Intro_to_Read_Team/Driver"
   ]
 }
