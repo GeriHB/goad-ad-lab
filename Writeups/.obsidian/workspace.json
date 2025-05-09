@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Pentesting/Active Directory attacking/GOAD/7. Bonus - Sliver.md",
+                "file": "Pentesting/Active Directory attacking/GOAD/1. Reconnaissance.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "7. Bonus - Sliver"
+              "title": "1. Reconnaissance"
             }
           }
         ]
@@ -161,6 +161,7 @@
   },
   "active": "a5fbd336b84cbcf0",
   "lastOpenFiles": [
+    "Pentesting/Active Directory attacking/GOAD/7. Bonus - Sliver.md",
     "Pentesting/Active Directory attacking/GOAD/6. ADCS and Delegation.md",
     "Pentesting/Active Directory attacking/GOAD/5. Golden Ticket.md",
     "Pentesting/Active Directory attacking/GOAD/3. Credential Access.md",
@@ -172,7 +173,6 @@
     "Pentesting/Active Directory attacking/GOAD/README.md",
     "Pentesting/Active Directory attacking/Ludus/GOAD/3. Credential Access.md",
     "Pentesting/Active Directory attacking/GOAD/GOAD.zip",
-    "Pentesting/Active Directory attacking/GOAD/7. Bonus - Sliver.md",
     "Pentesting/Active Directory attacking/GOAD",
     "Pentesting/Active Directory attacking.zip",
     "Pentesting/Active Directory attacking/Ludus/GOAD/4. Privilege Escalation.md",
