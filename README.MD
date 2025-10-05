@@ -6,7 +6,7 @@ The goal is to provide detailed write-ups that document different cybersecurity 
 
 Please note:
 
-- **Use at your own risk**: These techniques are for educational purposes in a controlled environment. Unauthorized penetration testing or hacking can be illegal.
+- **Use at your own risk**: These techniques are for educational purposes in a controlled environment. Unauthorized penetration testing or hacking can be illegal .
 - **Ethical Use**: Always ensure you have explicit permission to test systems you do not own.
 
 ## Contact
