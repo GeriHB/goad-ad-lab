@@ -1,0 +1,46 @@
+# Local note-taking configuration
+.obsidian/
+
+# Operating-system metadata
+.DS_Store
+Thumbs.db
+
+# Archives
+*.zip
+*.7z
+*.tar
+*.gz
+
+# Environment and authentication material
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+*.kirbi
+*.ccache
+
+# Raw credential-dumping output
+*.dmp
+*.dit
+*.sam
+*.system
+*.security
+*.ntds
+
+# Network captures
+*.pcap
+*.pcapng
+
+# Common offensive-security output directories
+loot/
+output/
+credentials/
+hashes/
+tickets/
+
+# Temporary files
+*.tmp
+*.swp
+*~

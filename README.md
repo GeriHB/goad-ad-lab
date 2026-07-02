@@ -1,43 +1,140 @@
-# Active Directory Offensive Security
+# GOAD Active Directory Security Assessment
 
-Welcome to the Active Directory Attacking section of my pentesting writeups. 
+This repository documents an Active Directory security assessment performed in the Game of Active Directory lab.
 
-Here, you'll find detailed guides, methodologies, and tools that I've used for performing attacks on Active Directory (AD) environments. 
+The assessment follows the development of an attack path from unauthenticated discovery through credential access, lateral movement, privilege escalation, domain compromise, Golden Ticket abuse, Active Directory Certificate Services misconfigurations, Kerberos delegation, and command-and-control operations with Sliver.
 
-This directory is dedicated to sharing knowledge, techniques, and experiences related to Active Directory security testing. 
-## GOAD Environment with LUDEUS
+Each section explains what was tested, why the technique worked, what evidence confirmed the result, the resulting security impact, and how the weakness could be detected or mitigated.
 
-**[GOAD (Greedy Offensive Active Directory)](https://github.com/Orange-Cyberdefense/GOAD)** is a lab environment specifically designed for practicing Active Directory attacks. 
+## Lab environment
 
-There are different types of GOAD labs. I have worked on the full GOAD lab, which has a total of 5 vms, 2 forests and 3 domains.
+The assessment was performed against the full GOAD environment deployed through **Ludus**.
 
-![GOAD](https://github.com/user-attachments/assets/f5dc28cd-ffbb-4123-95c5-16e2419df21e)
+The environment contains:
 
-Here's what you can find:
+- Five Windows virtual machines
+- Two Active Directory forests
+- Three domains
+- Multiple intentionally vulnerable authentication, trust, certificate, and delegation configurations
+- A separate Kali Linux assessment system
 
-- By now there are writeups on attacking Active Directory using Game of Active Directory (GOAD) which is installed on Ludus.
-  - [**LUDUS Tool:**](https://docs.ludus.cloud/docs/intro/)
+```mermaid
+flowchart LR
+	Kali["Kali Linux assessment system"]
+	subgraph SevenKingdomsForest["sevenkingdoms.local forest"]
+		KL["KINGSLANDING<br/>sevenkingdoms.local"]
+		WF["WINTERFELL<br/>north.sevenkingdoms.local"]
+		CB["CASTLEBLACK<br/>north.sevenkingdoms.local"]
+	end
 
-This document is a structured walkthrough of the GOAD (Game of Active Directory) lab. It follows a typical red team kill chain approach:
-1. Reconnaissance
-2. Initial Access
-3. Credential Access
-4. Privilege Escalation
-5. Golden Ticket
-6. ADCS and Delegation
-7. Bonus - Sliver
+	subgraph EssosForest["essos.local forest"]
+		M["MEEREEN<br/>essos.local"]
+		B["BRAAVOS<br/>essos.local"]
+	end
 
-## Disclaimer
+	Kali --> KL
+	Kali --> WF
+	Kali --> CB
+	Kali --> M
+	Kali --> B
+```
 
-Please note:
+## What this project demonstrates
 
-- **Use at your own risk**: These techniques are for educational purposes in a controlled environment. Unauthorized penetration testing or hacking can be illegal.
-- **Ethical Use**: Always ensure you have explicit permission to test systems you do not own.
+The assessment includes practical work involving:
 
-## Contact
+- Active Directory and SMB discovery
+- LDAP, RPC, and Kerberos enumeration
+- Password-policy analysis
+- AS-REP roasting and Kerberoasting
+- Controlled password spraying
+- LLMNR and NBT-NS poisoning
+- NetNTLMv2 credential capture and offline recovery
+- SMB share enumeration
+- Credential dumping and pass-the-hash
+- LSASS credential access
+- Privilege escalation and domain compromise
+- Golden Ticket creation and validation
+- Cross-domain trust abuse
+- Active Directory Certificate Services misconfigurations
+- Constrained, unconstrained, and resource-bsaed constrained delegation
+- Command-and-control operations with Sliver
 
-For questions, suggestions, or if you want to collaborate on AD security projects, reach out to me:
+## Assessment path
 
-- Email: [halilberishaa@gmail.com]
-- BlueSky: [[@halilberisha.bsky.social](https://bsky.app/profile/halilberisha.bsky.social)]
-- LinkedIn: [[@halilberisha](https://www.linkedin.com/in/halilberisha)]
+### 00 — Lab environment and scope
+
+[Architecture, rules of engagement, methodology, assumptions, and limitations](docs/00-lab-environment-and-scope.md)
+
+### 01 — Discovery and enumeration
+
+[Host discovery, domain identification, SMB configuration, anonymous enumeration, password-policy analysis, and Kerberos username discovery](docs/01-discovery-and-enumeration.md)
+
+### 02 — Initial credential access
+
+[AS-REP roasting, controlled password spraying, credential validation, and authenticated directory enumeration](docs/02-initial-credential-access.md)
+
+### 03 — Credential access and lateral movement
+
+[Kerberoasting, NetNTLMv2 capture, password recovery, share access, and movement between accessible systems](docs/03-credential-access-and-lateral-movement.md)
+
+### 04 — Privilege escalation and domain compromise
+
+[Privileged group discovery, credential dumping, pass-the-hash, LSASS access, and an alternative PrintNightmare escalation path](docs/04-privilege-escalation-and-domain-compromise.md)
+
+### 05 — Golden Ticket and cross-domain trust abuse
+
+[Domain SID discovery, `krbtgt` compromise, ticket creation, validation, persistence implications, and cross-domain impact](docs/05-golden-ticket-and-cross-domain-trust-abuse.md)
+
+### 06 — Active Directory Certificate Services
+
+[AD CS enumeration and assessment of ESC1, ESC2, ESC3, ESC4, ESC6, and ESC8 conditions](docs/06-adcs/README.md)
+
+### 07 — Kerberos delegation
+
+[Constrained, unconstrained, and resource-based constrained delegation](docs/07-kerberos-delegation.md)
+
+### 08 — Command and control with Sliver
+
+[Infrastructure setup, implant operation, session management, post-exploitation, cleanup, and defensive observations](docs/08-sliver/README.md)
+
+### 09 — Findings and defensive summary
+
+[The complete attack path, principal findings, defensive priorities, and lessons learned](docs/09-findings-and-defensive-summary.md)
+
+## Documentation approach
+
+Each chapter separates:
+
+- The starting position
+- The security question
+- The method used
+- The evidence collected
+- The resulting access or impact
+- Detection opportunities
+- Recommended mitigations
+- Relevant MITRE ATT&CK techniques
+
+Large terminal outputs, credential sets, ticket files, and repetitive tool output have been reduced to the evidence required to support each conclusion.
+
+## Tooling note
+
+The original assessment used **CrackMapExec** during several stages.
+
+Because **NetExec** is the actively maintained and continuation of the same project, the documentation preserves the commands used during the assessment while also showing the current NetExec equivalend where useful.
+
+## Scope and ethics
+
+All activity documented here was performed in an intentionally vulnerable and isolated lab.
+
+The material is intended for education, defensive understanding, professional development, and authorised security testing. It must not be used against systems without explicit permission.
+
+See [DISCLAIMER.md](DISCLAIMER.md) for the complete usage statement.
+
+## Attribution
+
+GOAD was created by Orange Cyberdefense.
+
+This repository contains my own assessment notes, analysis, evidence, and reporting. It does not redistribute the GOAD infrastructure or claim ownership of the original lab
+
+
