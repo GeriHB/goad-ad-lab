@@ -1,81 +1,139 @@
-# 2. Initial Access
+# Initial Credential Access
 
-## 2.1 ASREPRoasting
+## Objective
 
-First I will try **asreproasting** to try and get some passwords from the users I got hands on.
+This phase tested whether the user list from discovery could be converted into valid domain access without triggering unnecessary account lockouts.
 
-**asreproasting** is a type of attack which exploits accounts that don't require Kerberos pre-authentication. It sends an AS-REQ to KDC, and if the pre-authentication is disabled, the reponse is with an AS-REP message which contains encrypted data, where can be found also the password hash.
+## Starting position
 
-First we need to extract only the usernames from the results we got before. 
+- A list of valid or probable `north.sevenkingdoms.local` usernames
+- The lockout policy retrieved from `WINTERFELL`
+- One lab credential exposed in an account description
+- No administrative access
 
-Now I will try to get the passwords, and for this I will use the `impacket tools` which can be downloaded from `https://github.com/fortra/impacket/tree/master`.
+## AS-REP roasting
 
-`GetNPUsers` is one of the tools part of `impacket` which I will use for this purpose. It basically attempts to get TGTs for the users that don't have the property "Do not require Kerberos preauthentication".
+Accounts configured with **Kerberos pre-authentication disabled** can return AS-REP material without first proving knowledge of the account password. That encrypted material can be tested offline against candidate passwords.
 
-```shell
-GetNPUsers.py north.sevenkingdoms.local/ -no-pass -usersfile north_sevenkingdoms_filtered
+`Impacket's GetNPUsers.py` was used with the prepared username list:
+
+```bash
+GetNPUsers.py north.sevenkingdoms.local -no-pass -usersfile north-users.txt -dc-ip 10.4.10.11 -outputfile asrep-hashes.txt
 ```
 
-From this command I got a ticket for `brandon.stark`:
+![alt text](../assets/evidence/02-initial-access/asrep.png)
 
-<img width="1655" alt="Pasted_image_20241220161706" src="https://github.com/user-attachments/assets/482dfb60-02a4-4538-ad15-420b6519c845" />
+The request identified `brandon.stark` as AS-REP roastable.
 
-Now I will try hashcat with this hash, after i copy it in a file.
+The returned material was then tested offline with Hashcat:
 
-By issuing the command `hashcat -m 18200 hashed /usr/share/wordlists/rockyou.txt` which tells the hashcat to use the Kerberos as a decryption mechanism and try the rockyou wordlist to brute-force it, I got the following results:
-
-<img width="1630" alt="Pasted_image_20241220162914" src="https://github.com/user-attachments/assets/6c2c26c1-d002-4972-b152-5f48ac0bf214" />
-Here I can see the cracked password: `iseedeadpeople`.
-
-## 2.2 Password Spraying
-
-Now I will try Password Spraying to see if some additional passwords can be gained. Password Spraying is a technique where a single or small list of passwords is systematically tried across multiple user accounts.
-
-I will use the list of usernames as a password list, so the usernames will be tried if they have a password which is the same as any of the usernames.
-
-For this attack I will use the `Sprayhound` tool:
-
-```shell
-sprayhound -U username -d north.sevenkingdoms.local -dc 10.4.10.11 -lu samwell.tarly -lp Heartsbane --lower -t 2
+```bash
+hashcat -m 18200 asrep-hashes.txt /usr/share/wordlists/rockyou.txt
 ```
 
-In order to avoid the account lockdown, when trying different password, I provide here the credentials of an account that we have `samwell.tarly - Heartsbane`, and I provide the username file as a list of usernames and that will be used as the list of passwords as well.
+The password was recovered successfully:
 
-Via this command, the `sprayhound` will try to get password policies, and then by providing the `-t` I set the threshold to 2, meaning that the tool will stop trying passwords when two tries are left. This information about how many tries are allowed, `sprayhound` hopes to gain via the password policy.
+```text
+brandon.stark:iseedeadpeople
+```
 
-<img width="1214" alt="Pasted_image_20241223094759" src="https://github.com/user-attachments/assets/e99fcedd-9888-4c17-8a19-2076e80839f1" />
+![alt text](../assets/evidence/02-initial-access/brandon_stark.png)
 
-And, here I got another password! In total, now I have credentials from three accounts:
+The important distinction is that the KDC did not send a stored password hash. It returned encrypted AS-REP data that could be subjected to offline password guessing because pre-authentication was disabled for the account.
 
-```shell
+## Password-policy-aware spraying
+
+The previously retrieved lockout policy allowed five failed attempts before lockout.
+
+That information was used to keep the spray controlled and avoid repeated guesses agaisnt individual users.
+
+The assessment tested a small set of predictable password candidates, including the possibility that an account used its own username or character name as the password.
+
+`SprayHound` identified another valid credential:
+
+```text
+hodor:hodor
+```
+
+This result demonstarted a separate weakness from AS-REP roasting: the account was protected by Kerberos pre-authentication, but the password itself was highly predictable.
+
+## Credential validation
+
+At this stage, three credentials had been obtained through different causes:
+
+```text
 samwell.tarly:Heartsbane
 hodor:hodor
 brandon.stark:iseedeadpeople
 ```
 
-## 2.3 Getting the User Accounts
+The credential were validated against the domain before any broader enumeration was performed.
 
-One of the most important and first steps after acquiring credentials to an AD, is to use that account and get as much information about other users as possible.
+## Authenticated directory enumeration
 
-There are many tools that help on doing this.
+With a valid child-domain account, Impacket's `GetADUsers.py` was used to retrieve user metadata:
 
-GetADUsers:
-```shell
-GetADUsers.py -all north.sevenkingdoms.local/brandon.stark:iseedeadpeople
+```bash
+GetADUsers.py -all 'north.sevenkingdoms.local/brandon.stark:iseedeadpeople' -dc-ip 10.4.10.11
 ```
 
-<img width="1234" alt="Pasted_image_20241223104053" src="https://github.com/user-attachments/assets/6706792c-96b5-4d4f-b6cc-dc7fc76a4dc9" />
+![alt text](../assets/evidence/02-initial-access/GetADUsers.png)
 
-Here there are also some additional information as to where was the last time the password was set and the last time where the account has been logged in to the system.
+Authenticated LDAP queries were also tested against the parent domain:
 
-We can also use the users we have credentials to get users not only from the host they belong to, but also from other hosts in the system, as there is a high probability that there exist a trust between them.
-
-For that we can use `ldapsearch`:
-
-```shell
-ldapsearch -H ldap://10.4.10.10 -D "brandon.stark@north.sevenkingdoms.local" -w iseedeadpeople -b 'DC=sevenkingdoms,DC=local' "(&(objectCategory=person)(objectClass=user))" | grep 'distinguishedName'
+```bash
+ldapsearch -H ldap://10.4.10.1 -D 'brandon.stark@north.sevenkingdoms.local' -w 'iseedeapeople' -b 'DC=sevenkingdoms,DC=local' '(&(objectCategory=person)(objectClass=user))' | grep 'distinguieshedName'
 ```
+![alt text](../assets/evidence/02-initial-access/ldapsearch.png)
 
-So, from a user `brandon.sark` in Winterfell, I was able to get user information in Kingsldanding:
+The child-domain credential was accepted for directory queries in the parent domain. This confirmed useful cross-domain directory visibility but it did **not** by itself demonstrate administrative access or full compromise of the parent domain.
 
-<img width="1438" alt="Pasted_image_20241223105046" src="https://github.com/user-attachments/assets/4cb63fe2-48aa-4d0c-8bc5-6e96b7bb559d" />
+## Result
+
+The phase produced two additional valid accounts:
+
+- One through an account configured without Kerberos pre-authentication
+- One through a predictable password identified with a controlled spray
+
+Authenticated directory access then expanded the known user population and provided the basis for targeted service-account testing.
+
+## Security impact
+
+Both weaknesses allowed offline or low-noise credential acquisistion:
+
+- AS-REP roasting avoids repeated online password attempts after the encrypted response has been collected.
+- Predictable passwords can defeat otherwise correct authentication configuration
+
+Together, they changed hte assessment from anonymous reconnaissance to authenticated domain access.
+
+## Detection opportunities
+
+Defenders should monitor for:
+
+- AS-REQ activity for accounts that do not require pre-authentication
+- Event patterns showing one sourcetesting the same password across many accounts
+- Authentication attempts immediately below the lockout threshold
+- Unusual LDAP enumeration shortly after a first successful logon
+- Accounts with the `DONT_REQ_PREAUTH` flag
+
+## Mitigation
+
+- Require Kerberos pre-atuhentication for all normal user accounts
+- Use long, unique passwords that are not derived from usernames, character names, company names, or predictable patterns
+- Apply MFA where the protocol and service support it
+- Monitor password-spray patterns across accounts rather than only repeated failures against one account
+- Review account lockout policy alongside smart-lockout and identity-protection controls
+
+## MITRE ATT&CK mapping
+
+- `T1558.004` - AS-REP Roasting
+- `T1110.003` - Password Spraying
+- `T1087.002` - Domain Account Discovery
+
+## Key takeaway
+
+The initial foothold did not depend on a single failure. One account had an unsafe Kerberos configuration, another used a predictable password, and a third exposed its password in Active Directory metadata. The combination gave the assessment several independent paths into the domain.
+
+## Navigation
+
+[Previous: Discovery and enumeration](01-discovery-and-enumeration.md) | [Assessment index](../README.md) | [Next: Credential access and lateral movement](03-credential-access-and-lateral-movement.md)
