@@ -19,7 +19,6 @@ Sliver was not used as a shortcut to the earlier attack path. It was evaluated a
 - [Infrastructure and initial session](01-infrastructure-and-initial-session.md)
 - [Host and domain discovery](02-host-and-domain-discovery.md)
 - [Credential and directory assessment](03-credential-and-directory-assessment.md)
-- [Cleanup and defensive observations](04-cleanup-and-defensive-observations.md)
 
 ## Starting position
 
