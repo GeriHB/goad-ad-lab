@@ -24,7 +24,7 @@ GetUserSPNs.py -request -dc-ip 10.4.10.11 'north.sevenkingdoms.local/brandon.sta
 The first request failed with:
 
 ```text
-KRB_AP_ERR_SKEQ: Clock skew too great
+KRB_AP_ERR_SKEW: Clock skew too great
 ```
 
 Kerberos depends on time synchronisation. The Kali system was therefore aligned with the lab domain controller before the request was repeated:

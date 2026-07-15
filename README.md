@@ -57,7 +57,7 @@ The assessment includes practical work involving:
 - Golden Ticket creation and validation
 - Cross-domain trust abuse
 - Active Directory Certificate Services misconfigurations
-- Constrained, unconstrained, and resource-bsaed constrained delegation
+- Constrained, unconstrained, and resource-based constrained delegation
 - Command-and-control operations with Sliver
 
 ## Assessment path
@@ -121,7 +121,7 @@ Large terminal outputs, credential sets, ticket files, and repetitive tool outpu
 
 The original assessment used **CrackMapExec** during several stages.
 
-Because **NetExec** is the actively maintained and continuation of the same project, the documentation preserves the commands used during the assessment while also showing the current NetExec equivalend where useful.
+Because **NetExec** is the actively maintained continuation of the same project, the documentation preserves the commands used during the assessment while also showing the current NetExec equivalent where useful.
 
 ## Scope and ethics
 
